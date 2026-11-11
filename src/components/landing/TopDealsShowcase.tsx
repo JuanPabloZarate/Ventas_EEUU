@@ -153,6 +153,30 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.macys.com/shop/mens-clothing/mens-jackets-coats/Brand/Tommy%20Hilfiger?id=3763',
   },
 
+  // 5B. GUESS - PERFUME SEDUCTIVE HOMME / NOIR 100ML (< $50 USD - 65% OFF)
+  {
+    id: 'guess-perfume',
+    store: "Macy's Herald Sq / Perfumania NY",
+    brand: 'Guess',
+    isAmericanBrand: true,
+    title: 'Perfume Guess Seductive Homme / Noir EDT 100ml Spray',
+    category: 'Belleza',
+    image: '/images/deals/guess-perfume.jpg',
+    originalPrice: 72.0,
+    dealPrice: 24.99,
+    savings: 47.01,
+    discountPercent: 65,
+    bfScore: 9.7,
+    bfVerificationNote: 'Rebaja histórica del 65% en fragancias para regalo de fin de año en perfumerías de Manhattan',
+    ecommerceDates: 'Oferta Online: 24 Nov - 2 Dic',
+    ecommercePhase: 'Thanksgiving Drop',
+    taxNote: 'Presentación en estuche sellado original de 100ml',
+    tag: '65% OFF',
+    christmasTag: '🎁 Perfume de Diseñador',
+    highlights: 'Aroma seductor y sofisticado con notas de pimienta negra, nuez moscada, flor de azahar y maderas preciosas.',
+    buyUrl: 'https://www.macys.com/shop/beauty-products/perfume/Brand/GUESS?id=30087',
+  },
+
   // 6. TOMMY HILFIGER - CAMISETA LOGO TEE (< $50 USD - 62% OFF)
   {
     id: 'tommy-tshirt',
@@ -175,6 +199,102 @@ export const TOP_DEALS: DealItem[] = [
     christmasTag: '👕 Básico Americano',
     highlights: '100% algodón suave peinado con la icónica bandera bordada de Tommy Hilfiger en el pecho.',
     buyUrl: 'https://www.macys.com/shop/mens-clothing/mens-t-shirts/Brand/Tommy%20Hilfiger?id=30423',
+  },
+
+  // 6B. VICTORIA'S SECRET - FRAGRANCE MIST & BODY DUO (< $50 USD - 62% OFF)
+  {
+    id: 'victorias-secret-mist',
+    store: "Victoria's Secret 5th Ave NYC",
+    brand: "Victoria's Secret",
+    isAmericanBrand: true,
+    title: 'Set Festivo Fragrance Mist & Body Lotion (250ml c/u)',
+    category: 'Belleza',
+    image: '/images/deals/victorias-secret-mist.jpg',
+    originalPrice: 39.95,
+    dealPrice: 15.0,
+    savings: 24.95,
+    discountPercent: 62,
+    bfScore: 9.9,
+    bfVerificationNote: "Promoción icónica $15 USD por set en Black Friday oficial de Victoria's Secret",
+    ecommerceDates: 'Acceso Web Exclusivo: 22 Nov - 1 Dic',
+    ecommercePhase: 'Black Friday Oficial',
+    taxNote: 'El regalo festivo #1 en perfumería femenina de USA',
+    tag: '62% OFF',
+    christmasTag: "🎀 Regalo Estrella Victoria's Secret",
+    highlights: 'Dúo icónico con notas florales y frutales enriquecido con aloe nutritivo y vitamina E para máxima hidratación.',
+    buyUrl: 'https://www.victoriassecret.com/us/vs/beauty/mists-and-body-care',
+  },
+
+  // 6C. CALVIN KLEIN - CK ONE / EUPHORIA EAU DE TOILETTE (< $50 USD - 62% OFF)
+  {
+    id: 'calvin-klein-perfume',
+    store: "Macy's Herald Sq / Amazon USA",
+    brand: 'Calvin Klein Fragrances',
+    isAmericanBrand: true,
+    title: 'Perfume CK One / Euphoria Eau de Toilette Spray 100ml / 200ml',
+    category: 'Belleza',
+    image: '/images/deals/calvin-klein-perfume.jpg',
+    originalPrice: 89.0,
+    dealPrice: 34.0,
+    savings: 55.0,
+    discountPercent: 62,
+    bfScore: 9.8,
+    bfVerificationNote: "62% OFF en caja sellada con batch code oficial verificado en Macy's",
+    ecommerceDates: 'Early Fragrance Drops: 21 Nov - 1 Dic',
+    ecommercePhase: 'Black Friday Oficial',
+    taxNote: 'Perfume original garantizado con batch code USA',
+    tag: '62% OFF',
+    christmasTag: '🌟 Clásico Unisex & Regalo Top',
+    highlights: 'Fragancia icónica fresca y energizante con notas de té verde, bergamota, papaya, jazmín y ámbar cálido.',
+    buyUrl: 'https://www.macys.com/shop/beauty-products/perfume/Brand/Calvin%20Klein?id=30087',
+  },
+
+  // 6D. GAP - HOODIE CLÁSICO CON LOGO ARCH (< $50 USD - 58% OFF)
+  {
+    id: 'gap-logo-hoodie',
+    store: 'GAP Times Sq NYC',
+    brand: 'GAP',
+    isAmericanBrand: true,
+    title: 'Sudadera Clásica con Capucha Arch Logo Fleece Hoodie',
+    category: 'Moda',
+    image: '/images/deals/gap-logo-hoodie.jpg',
+    originalPrice: 59.99,
+    dealPrice: 24.99,
+    savings: 35.0,
+    discountPercent: 58,
+    bfScore: 9.8,
+    bfVerificationNote: '50% storewide + 15% cupón digital web con 0% Sales Tax en NYC',
+    ecommerceDates: 'GAP Cyber Days: 23 Nov - 1 Dic',
+    ecommercePhase: 'Black Friday Oficial',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '58% OFF',
+    christmasTag: '🇺🇸 Confort Clásico USA',
+    highlights: 'Algodón y vellón perchado ultra suave con el legendario aplique arqueado GAP en relieve en el pecho.',
+    buyUrl: 'https://www.gap.com/browse/category.do?cid=5180',
+  },
+
+  // 6E. VICTORIA'S SECRET - PIJAMA NAVIDEÑO SATIN PJ SET (< $50 USD - 56% OFF)
+  {
+    id: 'victorias-secret-pajama',
+    store: "Victoria's Secret Flagship NY",
+    brand: "Victoria's Secret",
+    isAmericanBrand: true,
+    title: 'Pijama Navideño Satin Long PJ Set de Satén Sedoso',
+    category: 'Moda',
+    image: '/images/deals/victorias-secret-pajama.jpg',
+    originalPrice: 79.95,
+    dealPrice: 35.0,
+    savings: 44.95,
+    discountPercent: 56,
+    bfScore: 9.7,
+    bfVerificationNote: "Doorbuster de Pijamas en Black Friday oficial de Victoria's Secret con 0% Sales Tax en NYC",
+    ecommerceDates: 'Web Drop: 23 Nov - 30 Nov',
+    ecommercePhase: 'Early Black Friday',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '56% OFF',
+    christmasTag: '✨ Nochebuena & Confort',
+    highlights: 'Satén sedoso premium con ribetes en contraste, corte holgado ultra cómodo y botones perlados.',
+    buyUrl: 'https://www.victoriassecret.com/us/vs/sleepwear-and-lingerie',
   },
 
   // 7. CALVIN KLEIN - PACK X3 BÓXERS (< $50 USD - 56% OFF)
@@ -247,6 +367,54 @@ export const TOP_DEALS: DealItem[] = [
     christmasTag: '🕯️ Tradición Navideña USA',
     highlights: 'Cera con aceites esenciales naturales y 3 mechas que perfuman espacios amplios hasta 45 horas.',
     buyUrl: 'https://www.bathandbodyworks.com/c/home-fragrance/3-wick-candles',
+  },
+
+  // 9B. ADIDAS - GRAND COURT 2.0 LEATHER SNEAKERS (< $50 USD - 50% OFF)
+  {
+    id: 'adidas-grand-court',
+    store: 'Adidas Flagship 5th Ave / Amazon USA',
+    brand: 'Adidas',
+    isAmericanBrand: false,
+    title: 'Zapatillas Urbanas Grand Court 2.0 Classic Leather',
+    category: 'Moda',
+    image: '/images/deals/adidas-grand-court.jpg',
+    originalPrice: 70.0,
+    dealPrice: 34.99,
+    savings: 35.01,
+    discountPercent: 50,
+    bfScore: 9.6,
+    bfVerificationNote: '50% OFF oficial en zapatillas urbanas de cuero sintético con 0% Tax en NYC',
+    ecommerceDates: 'Cyber Week Adidas: 24 Nov - 2 Dic',
+    ecommercePhase: 'Black Friday Oficial',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '50% OFF',
+    christmasTag: '👟 Calzado Urbano Clásico',
+    highlights: 'Silueta retro de tenis con plantilla Cloudfoam Comfort ultrasuave y las icónicas 3 rayas laterales.',
+    buyUrl: 'https://www.adidas.com/us/men-grand_court-shoes',
+  },
+
+  // 9C. NIKE - SPORTSWEAR CLUB FLEECE HOODIE (< $50 USD - 49% OFF)
+  {
+    id: 'nike-club-fleece',
+    store: 'Nike 5th Ave / Nike US',
+    brand: 'Nike',
+    isAmericanBrand: true,
+    title: 'Sudadera con Capucha Sportswear Club Fleece Hoodie',
+    category: 'Moda',
+    image: '/images/deals/nike-club-fleece.jpg',
+    originalPrice: 65.0,
+    dealPrice: 32.99,
+    savings: 32.01,
+    discountPercent: 49,
+    bfScore: 9.7,
+    bfVerificationNote: 'Rebaja exclusiva para miembros Nike + 0% Sales Tax en prendas individuales en NYC',
+    ecommerceDates: 'Nike Members Early: 22 Nov - 30 Nov',
+    ecommercePhase: 'Early Black Friday',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '49% OFF',
+    christmasTag: '⚡ Básico Deportivo Nike',
+    highlights: 'Interior de tejido Fleece cepillado suave con logotipo Futura bordado en el pecho y bolsillo de canguro.',
+    buyUrl: 'https://www.nike.com/w/mens-sale-hoodies-sweatshirts-3yaepznik1z6ymx6',
   },
 
   // 10. LEVI'S 501 JEANS (< $50 USD - 45% OFF)
@@ -557,6 +725,20 @@ export function BrandLogo({ type }: { type: string }) {
           <span className="text-[5.5px] tracking-wider text-slate-300 font-sans">NEW YORK</span>
         </div>
       );
+    case 'victorias-secret':
+      return (
+        <div className="bg-[#111111] text-[#f4a0b7] px-2 py-1 rounded-lg flex items-center justify-center font-serif text-[9px] font-black tracking-widest shadow-xs border border-[#f4a0b7]/40">
+          VICTORIA&apos;S SECRET
+        </div>
+      );
+    case 'adidas':
+      return (
+        <div className="bg-black text-white p-1 rounded-lg flex items-center justify-center shadow-xs">
+          <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
+            <path d="M8.6 17.5L5.7 13.9C5.4 13.5 4.8 13.4 4.4 13.7L1.6 15.6C1.2 15.9 1.1 16.5 1.4 16.9L5.3 22.3C5.6 22.7 6.2 22.8 6.6 22.5L9.4 20.6C9.8 20.3 9.9 19.7 9.6 19.3L8.6 17.5ZM14.9 12.8L10.3 6.9C10 6.5 9.4 6.4 9 6.7L6.2 8.6C5.8 8.9 5.7 9.5 6 9.9L11.6 17.6C11.9 18 12.5 18.1 12.9 17.8L15.7 15.9C16.1 15.6 16.2 15 15.9 14.6L14.9 12.8ZM21.2 8.1L14.9 .1C14.6 -.3 14 -.4 13.6 -.1L10.8 1.8C10.4 2.1 10.3 2.7 10.6 3.1L17.9 12.9C18.2 13.3 18.8 13.4 19.2 13.1L22 11.2C22.4 10.9 22.5 10.3 22.2 9.9L21.2 8.1Z" />
+          </svg>
+        </div>
+      );
     case 'amazon':
       return (
         <div className="bg-[#131921] text-white px-2 py-1 rounded-lg flex flex-col items-center justify-center border border-white/10 shadow-xs">
@@ -601,7 +783,7 @@ export interface StoreEcommerceItem {
   id: string;
   name: string;
   subchannel: string;
-  logoType: 'sephora' | 'macys' | 'nike' | 'bestbuy' | 'coach' | 'amazon' | 'target' | 'apple';
+  logoType: 'sephora' | 'macys' | 'nike' | 'bestbuy' | 'coach' | 'amazon' | 'target' | 'apple' | 'adidas' | 'victorias-secret';
   categoryTag: 'Belleza' | 'Moda' | 'Tecnología' | 'Outlets' | 'Variedad';
   status: 'Activo en Noviembre' | 'Próximo Drop' | 'Doorbuster Oficial';
   isActiveNow: boolean;
@@ -677,6 +859,26 @@ export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
     officialUrl: 'https://www.nike.com/w/black-friday-sale',
   },
 
+  // 3B. ADIDAS USA (Calzado & Ropa Deportiva)
+  {
+    id: 'adidas-us',
+    name: 'Adidas USA',
+    subchannel: 'Flagship 5th Ave & Web Oficial',
+    logoType: 'adidas',
+    categoryTag: 'Moda',
+    status: 'Activo en Noviembre',
+    isActiveNow: true,
+    statusBadge: '🟢 ACTIVO ESTE MES',
+    novemberDates: '15 al 23 Nov (adiClub Early Access) & 24 Nov al 2 Dic (Cyber Week)',
+    eventWindowDetail: 'Hasta 50% - 60% OFF en calzado clásico y running + 0% Sales Tax en calzado bajo $110 en NYC.',
+    keyDiscount: 'Hasta 60% OFF adiClub',
+    strongestDealBadge: '💥 50% OFF EN CALZADO CLÁSICO',
+    strongestDeal: 'Zapatillas Grand Court 2.0 Classic Leather de $70 a $34.99 USD con 0% Sales Tax en NYC.',
+    starProducts: 'Grand Court 2.0 ($34.99 USD), Ultraboost Light, Joggers Essentials',
+    taxNoteNYC: '0% Sales Tax en calzado bajo $110 USD en Nueva York',
+    officialUrl: 'https://www.adidas.com/us/black_friday',
+  },
+
   // 4. BEST BUY (Líder en Tecnología de NYC)
   {
     id: 'bestbuy-us',
@@ -713,6 +915,26 @@ export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
     strongestDeal: 'Rubores virales Rare Beauty a solo $23.80 USD, Sets Sol de Janeiro a $44 USD y $100 OFF en Dyson Airwrap.',
     starProducts: 'Rare Beauty Trio ($23.80), Sol de Janeiro ($44), Dyson Airwrap ($499)',
     officialUrl: 'https://www.sephora.com/beauty/black-friday',
+  },
+
+  // 5B. VICTORIA'S SECRET (Fragancias, Mists & Pijamas)
+  {
+    id: 'victorias-secret-us',
+    name: "Victoria's Secret",
+    subchannel: 'Flagship 5th Ave NYC & Web Oficial',
+    logoType: 'victorias-secret',
+    categoryTag: 'Belleza',
+    status: 'Activo en Noviembre',
+    isActiveNow: true,
+    statusBadge: '🟢 ACTIVO ESTE MES',
+    novemberDates: '18 al 24 Nov (Early VIP Drops) & 25 Nov al 2 Dic (Black Friday Oficial)',
+    eventWindowDetail: 'Bodymists icónicos a $15 USD, pijamas térmicos de satén al 56% OFF y 0% Sales Tax en Manhattan.',
+    keyDiscount: 'Hasta 62% OFF + Bodymists a $15 USD',
+    strongestDealBadge: '💥 MISTS $15 USD & PIJAMAS 56% OFF',
+    strongestDeal: 'Set de Body Mist + Loción baja de $39.95 a $15 USD y Pijamas navideños de satén bajan a solo $35 USD.',
+    starProducts: 'Fragrance Mist & Lotion ($15 USD), Satin PJ Set ($35 USD), Fragancias Bombshell',
+    taxNoteNYC: '0% Sales Tax en prendas individuales bajo $110 USD en NYC',
+    officialUrl: 'https://www.victoriassecret.com/us/vs/sale',
   },
 
   // 6. AMAZON USA (El Gigante del eCommerce)
@@ -781,6 +1003,7 @@ export function TopDealsShowcase() {
   const [sortBy, setSortBy] = useState<'discount' | 'savings' | 'bfScore'>('discount');
   const [showCalendar, setShowCalendar] = useState<boolean>(true);
   const [storeFilter, setStoreFilter] = useState<'Todos' | 'Activos Noviembre' | 'Moda' | 'Tecnología' | 'Belleza'>('Todos');
+  const [amazonUrlInput, setAmazonUrlInput] = useState<string>('');
 
   // Filtrado de tiendas del calendario
   const filteredStores = useMemo(() => {
@@ -911,6 +1134,148 @@ export function TopDealsShowcase() {
             >
               Puntos Black Friday
             </button>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* BANNER EXCLUSIVO AMAZON USA: Fechas Black Friday & Verificador de Compra  */}
+        {/* ========================================================================= */}
+        <div className="bg-gradient-to-br from-[#131921] via-[#1a2332] to-[#232f3e] rounded-3xl p-5 sm:p-7 text-white shadow-xl border border-amber-500/30 relative overflow-hidden">
+          {/* Acento de iluminación ambiental */}
+          <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 space-y-5">
+            {/* Fila Superior: Logo Amazon + Badges de Confianza */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/10 p-2 rounded-xl border border-white/15 shrink-0">
+                  <BrandLogo type="amazon" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-amber-400 font-bold text-xs uppercase tracking-wider">
+                      Hub Exclusivo Amazon USA
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/30">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span>Monitoreo Activo en Vivo</span>
+                    </span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-display font-black text-white">
+                    Calendario de Fechas Black Friday en Amazon & Verificador de Rebajas
+                  </h3>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <a
+                  href="https://www.amazon.com/blackfriday"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black text-xs font-black transition-all shadow-md"
+                >
+                  <span>Ir a Black Friday Amazon.com</span>
+                  <Icon name="open_in_new" size={13} />
+                </a>
+              </div>
+            </div>
+
+            {/* Calendario de 3 Fases de Fechas Oficiales de Amazon */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+              {/* Fase 1 */}
+              <div className="bg-white/5 rounded-2xl p-4 border border-white/10 hover:border-amber-400/40 transition-colors">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-[10.5px] font-bold border border-amber-500/30">
+                    20 al 26 Noviembre
+                  </span>
+                  <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Activo Ahora
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-white mb-1">
+                  Fase 1: Early Black Friday Drops
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed mb-2.5">
+                  Descuentos anticipados en dispositivos Amazon (Echo, Kindle, Fire TV) de hasta <strong>55% OFF</strong>, perfumería y ropa de invierno.
+                </p>
+                <div className="text-[10.5px] text-amber-300 font-semibold bg-black/30 px-2 py-1 rounded-lg">
+                  ✓ Mínimo histórico en gadgets para el hogar
+                </div>
+              </div>
+
+              {/* Fase 2 (Principal) */}
+              <div className="bg-gradient-to-b from-amber-500/15 to-transparent rounded-2xl p-4 border border-amber-400/50 shadow-md relative">
+                <div className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-amber-500 text-white text-[9.5px] font-black uppercase tracking-wider shadow-sm">
+                  Pico Máximo
+                </div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="px-2 py-0.5 rounded-md bg-amber-400 text-black text-[10.5px] font-black">
+                    27 al 29 Noviembre
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-white mb-1">
+                  Fase 2: Doorbusters Oficiales 48 Horas
+                </h4>
+                <p className="text-xs text-slate-200 leading-relaxed mb-2.5">
+                  Pico oficial de Acción de Gracias. <strong>Rebajas de hasta 70%</strong> en marcas americanas y <em>Lightning Deals</em> que rotan cada 5 minutos.
+                </p>
+                <div className="text-[10.5px] text-emerald-300 font-semibold bg-emerald-950/60 px-2 py-1 rounded-lg border border-emerald-500/30">
+                  ✓ Compramos de inmediato con Prime USA
+                </div>
+              </div>
+
+              {/* Fase 3 */}
+              <div className="bg-white/5 rounded-2xl p-4 border border-white/10 hover:border-amber-400/40 transition-colors">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="px-2 py-0.5 rounded-md bg-white/10 text-slate-200 text-[10.5px] font-bold border border-white/15">
+                    30 Nov al 2 Diciembre
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-semibold">
+                    Cyber Week
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-white mb-1">
+                  Fase 3: Cyber Monday & Cierre
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed mb-2.5">
+                  Liquidación masiva de laptops, auriculares Noise Cancelling, gaming y regalos navideños con garantía de devolución extendida.
+                </p>
+                <div className="text-[10.5px] text-slate-300 font-semibold bg-black/30 px-2 py-1 rounded-lg">
+                  ✓ Devolución navideña válida hasta 31 Enero
+                </div>
+              </div>
+            </div>
+
+            {/* Barra Interactiva: VERIFICADOR DE COMPRA ANTI-PRECIOS INFLADOS */}
+            <div className="bg-black/60 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-amber-400/30 flex flex-col lg:flex-row items-center justify-between gap-4">
+              <div className="space-y-1 text-center lg:text-left">
+                <div className="inline-flex items-center gap-1.5 text-amber-400 text-xs font-bold">
+                  <Icon name="verified" size={16} />
+                  <span>¿Viste una oferta en Amazon? Audita y Verifica antes de comprar:</span>
+                </div>
+                <p className="text-xs text-slate-300">
+                  Ingresa el enlace de Amazon para verificar su historial real de precios (evita descuentos falsos sobre precios inflados) y apartarlo al instante.
+                </p>
+              </div>
+
+              <div className="w-full lg:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <input
+                  type="text"
+                  value={amazonUrlInput}
+                  onChange={(e) => setAmazonUrlInput(e.target.value)}
+                  placeholder="Pega el link de Amazon (ej. amazon.com/dp/...)"
+                  className="bg-white/10 border border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 w-full sm:w-80"
+                />
+                <Link
+                  href={`/registro?store=Amazon&url=${encodeURIComponent(amazonUrlInput.trim() || 'https://www.amazon.com/blackfriday')}`}
+                  className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-md whitespace-nowrap shrink-0"
+                >
+                  <span>Verificar y Cotizar</span>
+                  <Icon name="arrow_forward" size={14} />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
