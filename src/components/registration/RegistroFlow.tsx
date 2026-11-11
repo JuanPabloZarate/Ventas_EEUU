@@ -2,22 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { RegistrationHero } from './RegistrationHero';
 import { ModalityToggle } from './ModalityToggle';
 import { ClientProfileForm } from './ClientProfileForm';
 import { DynamicItemBuilder } from './DynamicItemBuilder';
 import { FileUploadDropzone } from './FileUploadDropzone';
-import { SpecialHandling } from './SpecialHandling';
 import { StickySummarySidebar } from './StickySummarySidebar';
 import { SuiteCodeModal } from './SuiteCodeModal';
 import { OrderSuccessModal } from './OrderSuccessModal';
 import { ordersService, calculateFinancials } from '@/lib/orders-service';
-import type { Order, OrderItem, OrderModality, DeliveryMethod, SpecialInstructions } from '@/types/order';
+import type { Order, OrderItem, OrderModality, DeliveryMethod, SpecialInstructions, CreateOrderInput } from '@/types/order';
+import { Icon } from '@/components/ui/Icon';
 
 export function RegistroFlow() {
   const searchParams = useSearchParams();
 
-  // 1. Modality State initialized from query param ?modality=...
+  // 1. Modality State
   const [modality, setModality] = useState<OrderModality>('prealert');
 
   // 2. Client Profile State
@@ -28,7 +27,7 @@ export function RegistroFlow() {
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>('pickup');
   const [deliveryAddress, setDeliveryAddress] = useState('');
 
-  // 3. Dynamic Items State initialized with item #1
+  // 3. Dynamic Items State
   const [items, setItems] = useState<OrderItem[]>([
     {
       id: 'item-1',
@@ -42,8 +41,8 @@ export function RegistroFlow() {
     },
   ]);
 
-  // 4. Special Instructions & Invoice Proof
-  const [specialInstructions, setSpecialInstructions] = useState<SpecialInstructions>({
+  // 4. Instructions & Invoice File
+  const [specialInstructions] = useState<SpecialInstructions>({
     optimizeWeight: true,
     photoInspection: true,
     holidayPackaging: false,
@@ -56,7 +55,7 @@ export function RegistroFlow() {
   const [createdOrder, setCreatedOrder] = useState<Order | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // 6. Safe ingestion of search parameters on mount
+  // 6. Ingest search parameters
   useEffect(() => {
     const qModality = searchParams.get('modality');
     if (qModality === 'assisted' || qModality === 'prealert') {
@@ -78,7 +77,7 @@ export function RegistroFlow() {
     }
   }, [searchParams]);
 
-  // Real-time financials calculation
+  // Financials calculation
   const financials = calculateFinancials(
     items,
     modality === 'prealert' ? 0 : 8,
@@ -91,7 +90,7 @@ export function RegistroFlow() {
     const newErrors: Record<string, string> = {};
 
     if (!clientName.trim()) {
-      newErrors.clientName = 'Por favor ingresa el nombre completo del destinatario.';
+      newErrors.clientName = 'Ingresa el nombre completo del destinatario.';
     }
 
     const cleanPhone = clientPhone.replace(/\D/g, '');
@@ -99,21 +98,12 @@ export function RegistroFlow() {
       newErrors.clientPhone = 'Ingresa un número de celular de 8 dígitos de Bolivia.';
     }
 
-    if (deliveryMethod === 'delivery' && !deliveryAddress.trim()) {
-      newErrors.deliveryAddress = 'Ingresa la dirección detallada para la entrega a domicilio.';
-    }
-
-    const firstItem = items[0];
-    if (!firstItem || !firstItem.productName.trim()) {
-      newErrors.productName = 'Ingresa el nombre o descripción del producto principal.';
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Submit Handler
-  const handleSubmitOrder = async () => {
+  // Submit Order
+  const handleSubmit = async () => {
     if (!validateForm()) {
       window.scrollTo({ top: 120, behavior: 'smooth' });
       return;
@@ -121,68 +111,64 @@ export function RegistroFlow() {
 
     setIsSubmitting(true);
     try {
-      const order = await ordersService.createOrder({
+      const orderInput: CreateOrderInput = {
         clientName: clientName.trim(),
         clientPhone: clientPhone.trim(),
-        suiteCode: suiteCode.trim() || 'SOLICITADA',
         destinationCity,
         deliveryMethod,
-        deliveryAddress: deliveryMethod === 'delivery' ? deliveryAddress.trim() : '',
+        deliveryAddress: deliveryMethod === 'delivery' ? deliveryAddress.trim() : undefined,
         modality,
         items,
-        trackingUSA: modality === 'prealert' ? items[0]?.trackingUSA : undefined,
         specialInstructions,
         invoiceFileName: invoiceFile ? invoiceFile.name : undefined,
-        customCommissionPercent: modality === 'prealert' ? 0 : 8,
-        customBaseFeeUSD: 20.00,
-        customExchangeRateBOB: 6.96,
-      });
+      };
 
-      setCreatedOrder(order);
+      const newOrder = await ordersService.createOrder(orderInput);
+      setCreatedOrder(newOrder);
     } catch (err) {
-      console.error('Failed to create order:', err);
+      console.error('Error submitting order:', err);
+      alert('Hubo un inconveniente al registrar la orden. Por favor intenta de nuevo.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleResetForm = () => {
-    setClientName('');
-    setClientPhone('');
-    setSuiteCode('');
-    setDestinationCity('Santa Cruz de la Sierra');
-    setDeliveryMethod('pickup');
-    setDeliveryAddress('');
-    setItems([
-      {
-        id: `item-${Date.now()}-1`,
-        storeName: 'Apple Store 5th Ave',
-        category: 'Electrónica / Celulares / Laptops',
-        productName: '',
-        productUrl: '',
-        quantity: 1,
-        priceUSD: 0,
-        trackingUSA: '',
-      },
-    ]);
-    setInvoiceFile(null);
-    setErrors({});
-    setCreatedOrder(null);
-  };
-
   return (
-    <div className="flex flex-col gap-6">
-      {/* Hero Banner */}
-      <RegistrationHero currentModality={modality} />
+    <div className="space-y-6">
+      {/* Minimal Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-outline-variant/20">
+        <div>
+          <h1 className="text-2xl font-display font-bold text-on-surface tracking-tight">
+            Registro de Envío y Pre-Alerta
+          </h1>
+          <p className="text-xs sm:text-sm text-on-surface-variant mt-0.5">
+            Ingresa los datos para recepción en almacén de New York y entrega en Bolivia.
+          </p>
+        </div>
 
-      {/* Main 12-Column Responsive Workspace */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left 8-Cols: Interactive Form Flow */}
-        <div className="lg:col-span-8 flex flex-col gap-6 sm:gap-8">
-          {/* Mode Switcher */}
-          <ModalityToggle value={modality} onChange={setModality} />
+        <button
+          type="button"
+          onClick={() => setSuiteModalOpen(true)}
+          className="self-start sm:self-auto px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-xs font-semibold text-secondary flex items-center gap-1.5 transition-all border border-outline-variant/20"
+        >
+          <Icon name="warehouse" size={14} />
+          <span>Ver Dirección de Casillero en NY</span>
+        </button>
+      </div>
 
-          {/* Section 1: Customer Profile & Destination */}
+      {/* Main 2-Column Responsive Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        {/* Form Controls (8 Cols) */}
+        <div className="lg:col-span-8 space-y-5">
+          
+          {/* Modality Toggle */}
+          <ModalityToggle
+            value={modality}
+            onChange={setModality}
+          />
+
+          {/* Section 1: Client Profile & City */}
           <ClientProfileForm
             clientName={clientName}
             onClientNameChange={setClientName}
@@ -200,59 +186,58 @@ export function RegistroFlow() {
             errors={errors}
           />
 
-          {/* Section 2: Items & Package Catalog Form */}
-          <div className="bg-surface-container-lowest rounded-2xl p-6 sm:p-8 shadow-sm border border-outline-variant/30 space-y-6">
-            <DynamicItemBuilder
-              items={items}
-              onChange={setItems}
-              modality={modality}
-              errors={errors.productName ? { [items[0]?.id || 'item-1']: { productName: errors.productName } } : undefined}
-            />
+          {/* Section 2: Items Builder */}
+          <DynamicItemBuilder
+            items={items}
+            modality={modality}
+            onChange={setItems}
+          />
 
+          {/* Section 3: Optional Invoice Proof Dropzone */}
+          <div className="bg-surface rounded-2xl p-5 border border-outline-variant/30 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="w-6 h-6 rounded-md bg-primary-container text-white text-xs font-bold flex items-center justify-center">
+                3
+              </span>
+              <h3 className="font-display font-bold text-sm text-on-surface">
+                Factura o Comprobante de Compra (Opcional)
+              </h3>
+            </div>
             <FileUploadDropzone
               file={invoiceFile}
               onFileSelect={setInvoiceFile}
             />
-
-            <SpecialHandling
-              instructions={specialInstructions}
-              onChange={(updated: SpecialInstructions) => setSpecialInstructions(updated)}
-            />
           </div>
+
         </div>
 
-        {/* Right 4-Cols: Sticky Dynamic Cargo Summary */}
+        {/* Sticky Cost Summary (4 Cols) */}
         <div className="lg:col-span-4 sticky top-24">
           <StickySummarySidebar
-            items={items}
             modality={modality}
+            items={items}
             financials={financials}
-            onSubmit={handleSubmitOrder}
             isSubmitting={isSubmitting}
+            onSubmit={handleSubmit}
           />
         </div>
+
       </div>
 
       {/* Modals */}
       <SuiteCodeModal
         isOpen={suiteModalOpen}
         onClose={() => setSuiteModalOpen(false)}
-        onAssignCode={(code) => {
-          setSuiteCode(code);
-          setSuiteModalOpen(false);
-        }}
+        currentSuite={suiteCode || 'NY-2026-TEMP'}
         clientName={clientName}
-        currentSuite={suiteCode}
       />
 
-      <OrderSuccessModal
-        order={createdOrder}
-        isOpen={Boolean(createdOrder)}
-        onClose={() => setCreatedOrder(null)}
-        onResetForm={handleResetForm}
-      />
+      {createdOrder && (
+        <OrderSuccessModal
+          order={createdOrder}
+          onClose={() => setCreatedOrder(null)}
+        />
+      )}
     </div>
   );
 }
-
-export default RegistroFlow;
