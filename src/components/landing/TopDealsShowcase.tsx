@@ -1355,17 +1355,11 @@ export function TopDealsShowcase() {
                   {/* Badges Superiores */}
                   <div className="absolute top-2.5 inset-x-2.5 flex items-start justify-between gap-1 pointer-events-none">
                     <div className="flex flex-wrap items-center gap-1">
-                      {/* Badge de Marca Americana si corresponde */}
-                      {deal.isAmericanBrand ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md text-white text-[10px] font-bold border border-white/20 shadow-xs">
-                          <span>🇺🇸</span>
-                          <span>Marca USA</span>
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-semibold border border-white/10">
-                          {deal.brand}
-                        </span>
-                      )}
+                      {/* Badge con la Marca del Producto */}
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md text-white text-[10px] font-bold border border-white/20 shadow-xs">
+                        {deal.isAmericanBrand && <span>🇺🇸</span>}
+                        <span>{deal.brand}</span>
+                      </span>
 
                       {/* Micro-badge de Uso Cotidiano */}
                       <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-black/75 backdrop-blur-md text-amber-200 text-[9.5px] font-semibold border border-amber-300/30">
