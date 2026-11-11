@@ -873,9 +873,6 @@ export function TopDealsShowcase() {
             <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-on-surface tracking-tight">
               Ofertas Black Friday USA: Marcas Americanas & Oportunidades Reales
             </h2>
-            <p className="text-xs sm:text-sm text-on-surface-variant font-sans leading-relaxed">
-              Priorizamos <strong className="text-on-surface font-semibold">Coach, Michael Kors, Tommy Hilfiger, Calvin Klein, Levi&apos;s, Stanley y Rare Beauty</strong> con las mayores rebajas comprobadas (0% tax en NYC en ropa/calzado &lt;$110), pasando al final electrónica y gaming. Compara precios oficiales y reserva tu compra asistida o casillero.
-            </p>
           </div>
 
           {/* Selector de Orden */}
@@ -914,25 +911,6 @@ export function TopDealsShowcase() {
             >
               Puntos Black Friday
             </button>
-          </div>
-        </div>
-
-        {/* ========================================================================= */}
-        {/* TICKER DE ALTA URGENCIA / BASTIÓN OFERTIVO DE BLACK FRIDAY                */}
-        {/* ========================================================================= */}
-        <div className="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-white p-3 sm:p-3.5 rounded-2xl shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs font-bold">
-          <div className="flex items-center gap-2.5">
-            <span className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center shrink-0 text-sm">
-              🔥
-            </span>
-            <span className="tracking-wide">
-              <strong>DOORBUSTERS BLACK FRIDAY MANHATTAN:</strong> Rebajas históricas de hasta <strong>77% OFF</strong> en Coach • <strong>75%</strong> en Michael Kors • <strong>65%</strong> en Tommy Hilfiger • <strong>{under50Count} Chollos &lt; $50 USD</strong>
-            </span>
-          </div>
-          <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
-            <span className="px-2.5 py-0.5 rounded-full bg-black/30 text-white font-mono text-[11px] font-bold border border-white/20">
-              0% Sales Tax NYC &lt; $110
-            </span>
           </div>
         </div>
 
