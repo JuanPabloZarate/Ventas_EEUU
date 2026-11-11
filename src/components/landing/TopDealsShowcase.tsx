@@ -29,8 +29,9 @@ export interface DealItem {
 }
 
 // Catálogo ordenado estratégicamente:
-// 1. Marcas Americanas con los mayores descuentos arriba (77%, 75%, 65%, 54%, 45%, 44%...)
-// 2. Electrónicos agrupados al final de la lista según requerimiento
+// 1. Marcas Americanas con los mayores descuentos arriba (77%, 75%, 72%, 70%, 65%, 62%, 56%, 54%...)
+// 2. Gran selección de Chollos Menores a $50 USD ideales para regalos navideños
+// 3. Electrónicos agrupados al final de la lista según requerimiento
 export const TOP_DEALS: DealItem[] = [
   // 1. COACH (Top 1 Ahorro & Descuento - 77% OFF)
   {
@@ -80,7 +81,55 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.michaelkors.com/sale',
   },
 
-  // 3. TOMMY HILFIGER (Top 3 Ahorro - 65% OFF)
+  // 3. COACH OUTLET - BILLETERA CORNER ZIP (< $50 USD - 72% OFF)
+  {
+    id: 'coach-wristlet',
+    store: 'Coach Outlet Woodbury NY',
+    brand: 'Coach',
+    isAmericanBrand: true,
+    title: 'Billetera de Muñeca Corner Zip Signature Canvas',
+    category: 'Moda',
+    image: '/images/deals/coach-wristlet.jpg',
+    originalPrice: 88,
+    dealPrice: 25.0,
+    savings: 63,
+    discountPercent: 72,
+    bfScore: 9.9,
+    bfVerificationNote: '72% OFF liquidación de carteras en Woodbury Outlets',
+    ecommerceDates: 'Apertura Online: 20 Nov - 2 Dic',
+    ecommercePhase: 'Early Black Friday',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '72% OFF',
+    christmasTag: '🎁 El Regalo #1 de Coach',
+    highlights: 'Cuero refinado y lona monograma emblemática con correa de muñeca y 2 ranuras para tarjetas.',
+    buyUrl: 'https://www.coachoutlet.com/shop/black-friday-deals',
+  },
+
+  // 4. MICHAEL KORS - TARJETERO / BILLETERA SAFFIANO (< $50 USD - 70% OFF)
+  {
+    id: 'michael-kors-wallet',
+    store: "Macy's / MK Outlet NYC",
+    brand: 'Michael Kors',
+    isAmericanBrand: true,
+    title: 'Billetera y Tarjetero Jet Set Small Saffiano Leather',
+    category: 'Moda',
+    image: '/images/deals/michael-kors-wallet.jpg',
+    originalPrice: 98,
+    dealPrice: 29.0,
+    savings: 69,
+    discountPercent: 70,
+    bfScore: 9.8,
+    bfVerificationNote: '70% OFF en racks especiales de Black Friday Manhattan',
+    ecommerceDates: 'Web Drop: 23 Nov - 1 Dic',
+    ecommercePhase: 'Black Friday Oficial',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '70% OFF',
+    christmasTag: '✨ Billetera de Lujo',
+    highlights: 'Cuero Saffiano premium con logo metálico dorado, compartimento de monedas y tarjetas.',
+    buyUrl: 'https://www.michaelkors.com/sale',
+  },
+
+  // 5. TOMMY HILFIGER PUFFER (65% OFF)
   {
     id: 'tommy-puffer',
     store: "Macy's Herald Sq",
@@ -104,7 +153,55 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.macys.com/shop/mens-clothing/mens-jackets-coats/Brand/Tommy%20Hilfiger?id=3763',
   },
 
-  // 4. COLUMBIA SPORTSWEAR (54% OFF)
+  // 6. TOMMY HILFIGER - CAMISETA LOGO TEE (< $50 USD - 62% OFF)
+  {
+    id: 'tommy-tshirt',
+    store: "Macy's Herald Sq",
+    brand: 'Tommy Hilfiger',
+    isAmericanBrand: true,
+    title: 'Camiseta de Algodón Classic Graphic Logo Tee',
+    category: 'Moda',
+    image: '/images/deals/tommy-tshirt.jpg',
+    originalPrice: 39.5,
+    dealPrice: 14.99,
+    savings: 24.51,
+    discountPercent: 62,
+    bfScore: 9.7,
+    bfVerificationNote: "Doorbuster de ropa casual en Macy's Herald Sq",
+    ecommerceDates: 'Acceso Online: 23 Nov - 30 Nov',
+    ecommercePhase: 'Early Black Friday',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '62% OFF',
+    christmasTag: '👕 Básico Americano',
+    highlights: '100% algodón suave peinado con la icónica bandera bordada de Tommy Hilfiger en el pecho.',
+    buyUrl: 'https://www.macys.com/shop/mens-clothing/mens-t-shirts/Brand/Tommy%20Hilfiger?id=30423',
+  },
+
+  // 7. CALVIN KLEIN - PACK X3 BÓXERS (< $50 USD - 56% OFF)
+  {
+    id: 'calvin-klein-boxers',
+    store: "Macy's Herald Sq / Calvin Klein US",
+    brand: 'Calvin Klein',
+    isAmericanBrand: true,
+    title: 'Pack x3 Bóxers de Algodón Stretch Classic Fit',
+    category: 'Moda',
+    image: '/images/deals/calvin-klein-boxers.jpg',
+    originalPrice: 45.0,
+    dealPrice: 19.99,
+    savings: 25.01,
+    discountPercent: 56,
+    bfScore: 9.8,
+    bfVerificationNote: '56% OFF en el pack más vendido de ropa interior de EE.UU.',
+    ecommerceDates: 'Online Drop: 20 Nov - 1 Dic',
+    ecommercePhase: 'Black Friday Oficial',
+    taxNote: '0% Sales Tax en NYC (menos de $110)',
+    tag: '56% OFF',
+    christmasTag: '🎁 Regalo Esencial',
+    highlights: 'Pack de 3 unidades en algodón stretch de alta durabilidad con pretina elástica emblemática.',
+    buyUrl: 'https://www.macys.com/shop/mens-clothing/mens-underwear/Brand/Calvin%20Klein?id=57',
+  },
+
+  // 8. COLUMBIA SPORTSWEAR (< $50 USD - 54% OFF)
   {
     id: 'columbia-fleece',
     store: 'Columbia Sportswear NYC',
@@ -128,7 +225,31 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.columbia.com/c/sale/',
   },
 
-  // 5. LEVI'S (45% OFF)
+  // 9. BATH & BODY WORKS - VELA 3 MECHAS (< $50 USD - 52% OFF)
+  {
+    id: 'bath-body-works-candle',
+    store: 'Bath & Body Works 5th Ave NYC',
+    brand: 'Bath & Body Works',
+    isAmericanBrand: true,
+    title: 'Vela Aromática 3 Mechas Edición Navideña (3-Wick Candle)',
+    category: 'Lifestyle',
+    image: '/images/deals/bath-body-works.jpg',
+    originalPrice: 26.95,
+    dealPrice: 12.95,
+    savings: 14.0,
+    discountPercent: 52,
+    bfScore: 9.9,
+    bfVerificationNote: 'Precio histórico del evento anual Candle Day en Nueva York',
+    ecommerceDates: 'Candle Day & BF: 24 Nov - 2 Dic',
+    ecommercePhase: 'Thanksgiving Drop',
+    taxNote: 'El aroma navideño preferido en hogares de USA',
+    tag: '52% OFF',
+    christmasTag: '🕯️ Tradición Navideña USA',
+    highlights: 'Cera con aceites esenciales naturales y 3 mechas que perfuman espacios amplios hasta 45 horas.',
+    buyUrl: 'https://www.bathandbodyworks.com/c/home-fragrance/3-wick-candles',
+  },
+
+  // 10. LEVI'S 501 JEANS (< $50 USD - 45% OFF)
   {
     id: 'levis-501-jeans',
     store: "Levi's Store Times Sq / SoHo",
@@ -152,7 +273,7 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.levi.com/US/en_US/clothing/men/jeans/501-original-fit-mens-jeans/p/005010114',
   },
 
-  // 6. NIKE (44% OFF)
+  // 11. NIKE PEGASUS (44% OFF)
   {
     id: 'nike-pegasus',
     store: 'Nike 5th Ave / Nike US',
@@ -176,7 +297,7 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.nike.com/w/mens-pegasus-running-shoes-37v7jznik1zy7ok',
   },
 
-  // 7. STANLEY 1913 (35% OFF - El termo más codiciado)
+  // 12. STANLEY 1913 TUMBLER (< $50 USD - 35% OFF)
   {
     id: 'stanley-quencher',
     store: 'Target / Amazon / REI',
@@ -200,7 +321,7 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.amazon.com/dp/B0BN2C17D8',
   },
 
-  // 8. SOL DE JANEIRO (35% OFF)
+  // 13. SOL DE JANEIRO SET (< $50 USD - 35% OFF)
   {
     id: 'sol-de-janeiro-set',
     store: 'Sephora Times Sq',
@@ -220,11 +341,35 @@ export const TOP_DEALS: DealItem[] = [
     taxNote: 'Edición limitada con cofre de regalo',
     tag: '35% OFF',
     christmasTag: '💄 Set Festivo Exclusivo',
-    highlights: 'Fragancia Cheirosa 68 irresistible con crema hidratante reafirmante corporal de culto.',
+    highlights: 'Fragancia Cheirosa 68 con crema hidratante reafirmante corporal de culto mundial.',
     buyUrl: 'https://www.sephora.com/brand/sol-de-janeiro',
   },
 
-  // 9. DYSON BEAUTY ($100 OFF)
+  // 14. RARE BEAUTY - SOFT PINCH LIQUID BLUSH TRIO (< $50 USD - 30% OFF)
+  {
+    id: 'rare-beauty-blush',
+    store: 'Sephora Times Sq',
+    brand: 'Rare Beauty',
+    isAmericanBrand: true,
+    title: 'Set Festivo Soft Pinch Liquid Blush Trio (Selena Gomez)',
+    category: 'Belleza',
+    image: '/images/deals/rare-beauty-blush.jpg',
+    originalPrice: 34.0,
+    dealPrice: 23.8,
+    savings: 10.2,
+    discountPercent: 30,
+    bfScore: 9.7,
+    bfVerificationNote: 'El rubor viral más codiciado de Sephora en cofre de 3 tonos',
+    ecommerceDates: 'Sephora App Early: 24 Nov - 1 Dic',
+    ecommercePhase: 'Early Black Friday',
+    taxNote: 'Edición festiva de colección limitada',
+    tag: '30% OFF',
+    christmasTag: '💄 Viral de Belleza',
+    highlights: 'Fórmula ultraligera y de alta pigmentación en acabado mate y radiante que dura todo el día sin resecar.',
+    buyUrl: 'https://www.sephora.com/brand/rare-beauty-by-selena-gomez',
+  },
+
+  // 15. DYSON BEAUTY ($100 OFF)
   {
     id: 'dyson-airwrap',
     store: 'Sephora / Best Buy',
@@ -248,9 +393,33 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.sephora.com/product/airwrap-styler-P437999',
   },
 
-  // --- SECCIÓN FINAL: ELECTRÓNICOS & TECH (Agrupados al final) ---
+  // --- SECCIÓN FINAL: ELECTRÓNICOS & GADGETS (Agrupados al final) ---
 
-  // 10. SONY NOISE CANCELLING (38% OFF)
+  // 16. AMAZON ECHO DOT 5 (< $50 USD - 54% OFF)
+  {
+    id: 'echo-dot-5',
+    store: 'Amazon USA',
+    brand: 'Amazon',
+    isAmericanBrand: true,
+    title: 'Altavoz Inteligente Echo Dot 5ta Generación con Alexa',
+    category: 'Tech',
+    image: '/images/deals/echo-dot.jpg',
+    originalPrice: 49.99,
+    dealPrice: 22.99,
+    savings: 27.0,
+    discountPercent: 54,
+    bfScore: 9.8,
+    bfVerificationNote: '54% OFF histórico en el gadget más vendido de Amazon',
+    ecommerceDates: 'Black Friday 48h: 21 Nov - 1 Dic',
+    ecommercePhase: 'Black Friday Oficial',
+    taxNote: 'El regalo tech más accesible y popular',
+    tag: '54% OFF',
+    christmasTag: '🔊 Gadget #1 de Amazon',
+    highlights: 'Audio de gran nitidez con graves profundos, control de música y asistente de voz Alexa integrado.',
+    buyUrl: 'https://www.amazon.com/dp/B09B8V1LZ3',
+  },
+
+  // 17. SONY NOISE CANCELLING (38% OFF)
   {
     id: 'sony-wh1000xm5',
     store: 'Best Buy / Amazon',
@@ -274,7 +443,7 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.amazon.com/dp/B09XS7JWHH',
   },
 
-  // 11. APPLE MACBOOK AIR M2 ($250 OFF)
+  // 18. APPLE MACBOOK AIR M2 ($250 OFF)
   {
     id: 'macbook-air-m2',
     store: 'Best Buy NYC',
@@ -298,7 +467,7 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.bestbuy.com/site/apple-macbook-air-13-inch-laptop-m2-chip-16gb-memory-256gb-ssd-midnight/6509650.p',
   },
 
-  // 12. APPLE AIRPODS PRO 2 ($60 OFF)
+  // 19. APPLE AIRPODS PRO 2 ($60 OFF)
   {
     id: 'airpods-pro-2',
     store: 'Best Buy / B&H Photo',
@@ -322,7 +491,7 @@ export const TOP_DEALS: DealItem[] = [
     buyUrl: 'https://www.bhphotovideo.com/c/product/1785392-REG/apple_mtjv3am_a_airpods_pro_2nd_generation.html',
   },
 
-  // 13. PLAYSTATION 5 SLIM BUNDLE (Gaming al final)
+  // 20. PLAYSTATION 5 SLIM BUNDLE (Gaming al final)
   {
     id: 'ps5-slim-bundle',
     store: 'Best Buy / Target',
@@ -350,7 +519,7 @@ export const TOP_DEALS: DealItem[] = [
 // =========================================================================
 // RENDERIZADOR DE LOGOS VECTORIALES OFICIALES
 // =========================================================================
-export function BrandLogo({ type, className = 'w-7 h-7' }: { type: string; className?: string }) {
+export function BrandLogo({ type }: { type: string }) {
   switch (type) {
     case 'sephora':
       return (
@@ -467,7 +636,7 @@ export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
   {
     id: 'macys-herald-sq',
     name: "Macy's",
-    subchannel: "Herald Sq Manhattan & Web",
+    subchannel: 'Herald Sq Manhattan & Web',
     logoType: 'macys',
     categoryTag: 'Moda',
     status: 'Activo en Noviembre',
@@ -529,7 +698,7 @@ export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
     novemberDates: '15 al 23 Nov (VIP Pre-Sale 70% OFF) & 24 Nov al 2 Dic (Cyber Week)',
     eventWindowDetail: '70% de descuento en toda la tienda online + 20% a 25% OFF acumulado en el carrito de compras.',
     keyDiscount: 'Hasta 77% OFF Acumulado',
-    starProducts: 'Cartera City Tote Signature ($89 USD), Rowan Satchel, Billeteras de cuero',
+    starProducts: 'Cartera City Tote ($89 USD), Corner Zip Wristlet ($25 USD), Billeteras de cuero',
     taxNoteNYC: 'Ahorro masivo en liquidación de diseñador estadounidense',
     officialUrl: 'https://www.coachoutlet.com/shop/black-friday-deals',
   },
@@ -547,7 +716,7 @@ export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
     novemberDates: '17 al 26 Nov (Early Black Friday) & 27 al 28 Nov (Black Friday 48 Horas)',
     eventWindowDetail: 'Ofertas relámpago continuas que rotan cada 5 minutos en termos, gadgets y electrónica.',
     keyDiscount: 'Doorbusters & Lightning Deals',
-    starProducts: 'Stanley Quencher 40oz ($29 USD), Kindle Paperwhite, Apple Watch Series 10',
+    starProducts: 'Stanley Quencher 40oz ($29 USD), Echo Dot ($22.99 USD), Kindle Paperwhite',
     officialUrl: 'https://www.amazon.com/blackfriday',
   },
 
@@ -564,7 +733,7 @@ export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
     novemberDates: '10 al 23 Nov (Early Holiday Deals) & 24 al 30 Nov (Black Friday Week)',
     eventWindowDetail: 'Promociones anticipadas en bundles de videojuegos con juegos gratis y juguetes coleccionables.',
     keyDiscount: 'Packs Gamer & Hasta 50% OFF',
-    starProducts: 'PS5 Slim Disc Bundle con Juego Triple A gratis ($449.99 USD), Nintendo Switch',
+    starProducts: 'PS5 Slim Disc Bundle con Juego gratis ($449.99 USD), Nintendo Switch',
     officialUrl: 'https://www.target.com/c/black-friday/-/N-55119',
   },
 
@@ -588,7 +757,7 @@ export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
 
 export function TopDealsShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<
-    'Todas' | 'Marcas Americanas' | 'Moda & Outlets' | 'Lifestyle & Belleza' | 'Electrónicos & Gaming'
+    'Todas' | 'Menos de $50 USD' | 'Marcas Americanas' | 'Moda & Outlets' | 'Lifestyle & Belleza' | 'Electrónicos & Gaming'
   >('Todas');
 
   const [sortBy, setSortBy] = useState<'discount' | 'savings' | 'bfScore'>('discount');
@@ -607,11 +776,17 @@ export function TopDealsShowcase() {
     });
   }, [storeFilter]);
 
+  // Cantidad de productos menores a $50 USD
+  const under50Count = useMemo(() => {
+    return TOP_DEALS.filter((d) => d.dealPrice < 50).length;
+  }, []);
+
   // Filtrado y Ordenamiento de Productos
   const processedDeals = useMemo(() => {
     // 1. Filtrar por categoría
     let list = TOP_DEALS.filter((deal) => {
       if (selectedCategory === 'Todas') return true;
+      if (selectedCategory === 'Menos de $50 USD') return deal.dealPrice < 50;
       if (selectedCategory === 'Marcas Americanas') return deal.isAmericanBrand;
       if (selectedCategory === 'Moda & Outlets') return deal.category === 'Moda';
       if (selectedCategory === 'Lifestyle & Belleza')
@@ -622,8 +797,8 @@ export function TopDealsShowcase() {
     });
 
     // 2. Ordenar manteniendo los requerimientos:
-    // En 'Todas', marcas americanas y mejores ofertas primero, electrónicos siempre al final
-    if (selectedCategory === 'Todas') {
+    // En 'Todas' y en 'Menos de $50 USD', mostramos mejores ofertas arriba y dejamos electrónicos al final
+    if (selectedCategory === 'Todas' || selectedCategory === 'Menos de $50 USD') {
       const nonTech = list.filter((d) => d.category !== 'Tech' && d.category !== 'Gaming');
       const tech = list.filter((d) => d.category === 'Tech' || d.category === 'Gaming');
 
@@ -657,7 +832,7 @@ export function TopDealsShowcase() {
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* ========================================================================= */}
-        {/* HEADER: Enfoque en Marcas Americanas, Mejores Ofertas y Verdadera Rebaja */}
+        {/* HEADER: Enfoque en Marcas Americanas, Chollos < $50 USD y Rebajas Reales  */}
         {/* ========================================================================= */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="space-y-2 max-w-3xl">
@@ -667,9 +842,9 @@ export function TopDealsShowcase() {
                 <span>Marcas Americanas de Culto</span>
               </span>
               <span className="text-secondary/30">•</span>
-              <span className="text-error font-bold flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-error animate-pulse"></span>
-                <span>Puntos de Black Friday: Rebajas Reales Comprobadas</span>
+              <span className="text-emerald-700 font-bold flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>{under50Count} Chollos Menores a $50 USD</span>
               </span>
               <span className="text-secondary/30">•</span>
               <span className="font-mono text-[11px] text-primary-container font-bold">
@@ -681,7 +856,7 @@ export function TopDealsShowcase() {
               Ofertas Black Friday USA: Marcas Americanas & Oportunidades Reales
             </h2>
             <p className="text-xs sm:text-sm text-on-surface-variant font-sans leading-relaxed">
-              Priorizamos <strong className="text-on-surface font-semibold">Coach, Nike, Tommy Hilfiger, Levi&apos;s, Stanley y Michael Kors</strong> con las mayores rebajas comprobadas (0% tax en NYC en ropa/calzado &lt;$110), pasando al final electrónica y gaming. Compara precios oficiales y reserva tu compra asistida o casillero.
+              Priorizamos <strong className="text-on-surface font-semibold">Coach, Michael Kors, Tommy Hilfiger, Calvin Klein, Levi&apos;s, Stanley y Rare Beauty</strong> con las mayores rebajas comprobadas (0% tax en NYC en ropa/calzado &lt;$110), pasando al final electrónica y gaming. Compara precios oficiales y reserva tu compra asistida o casillero.
             </p>
           </div>
 
@@ -906,13 +1081,14 @@ export function TopDealsShowcase() {
         </div>
 
         {/* ========================================================================= */}
-        {/* CATEGORÍAS & FILTROS (Electrónicos al final de las pestañas)              */}
+        {/* CATEGORÍAS & FILTROS (Incluye Pestaña Especial "Menos de $50 USD")       */}
         {/* ========================================================================= */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-outline-variant/20 pb-4">
           <div className="flex items-center gap-1.5 bg-surface-container-low p-1 rounded-2xl overflow-x-auto max-w-full">
             {(
               [
                 'Todas',
+                'Menos de $50 USD',
                 'Marcas Americanas',
                 'Moda & Outlets',
                 'Lifestyle & Belleza',
@@ -930,6 +1106,7 @@ export function TopDealsShowcase() {
                       : 'text-on-surface-variant hover:text-on-surface'
                   }`}
                 >
+                  {cat === 'Menos de $50 USD' && <span>🏷️</span>}
                   {cat === 'Marcas Americanas' && <span>🇺🇸</span>}
                   {cat === 'Moda & Outlets' && <span>👜</span>}
                   {cat === 'Lifestyle & Belleza' && <span>💄</span>}
@@ -939,6 +1116,8 @@ export function TopDealsShowcase() {
                     (
                     {cat === 'Todas'
                       ? TOP_DEALS.length
+                      : cat === 'Menos de $50 USD'
+                      ? under50Count
                       : cat === 'Marcas Americanas'
                       ? TOP_DEALS.filter((d) => d.isAmericanBrand).length
                       : cat === 'Moda & Outlets'
@@ -955,16 +1134,19 @@ export function TopDealsShowcase() {
 
           <div className="text-xs text-on-surface-variant flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Mostrando {processedDeals.length} ofertas verificadas con fotos oficiales</span>
+            <span>
+              Mostrando {processedDeals.length} ofertas verificadas con fotos oficiales
+            </span>
           </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* GRID DE PRODUCTOS: Con Fotos, Puntos Black Friday & Fechas eCommerce      */}
+        {/* GRID DE PRODUCTOS: Con Fotos, Puntos Black Friday, Tag < $50 & eCommerce  */}
         {/* ========================================================================= */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {processedDeals.map((deal) => {
             const isTech = deal.category === 'Tech' || deal.category === 'Gaming';
+            const isUnder50 = deal.dealPrice < 50;
 
             return (
               <div
@@ -990,20 +1172,29 @@ export function TopDealsShowcase() {
 
                   {/* Badges Superiores */}
                   <div className="absolute top-2.5 inset-x-2.5 flex items-start justify-between gap-1 pointer-events-none">
-                    {/* Badge de Marca Americana si corresponde */}
-                    {deal.isAmericanBrand ? (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/75 backdrop-blur-md text-white text-[10px] font-bold border border-white/20 shadow-xs">
-                        <span>🇺🇸</span>
-                        <span>Marca USA</span>
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-semibold border border-white/10">
-                        {deal.brand}
-                      </span>
-                    )}
+                    <div className="flex flex-wrap items-center gap-1">
+                      {/* Badge de Marca Americana si corresponde */}
+                      {deal.isAmericanBrand ? (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/75 backdrop-blur-md text-white text-[10px] font-bold border border-white/20 shadow-xs">
+                          <span>🇺🇸</span>
+                          <span>Marca USA</span>
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-semibold border border-white/10">
+                          {deal.brand}
+                        </span>
+                      )}
+
+                      {/* Micro-badge para productos < $50 USD */}
+                      {isUnder50 && (
+                        <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-emerald-600/90 backdrop-blur-md text-white text-[9.5px] font-black border border-emerald-300/40 shadow-xs">
+                          <span>&lt; $50</span>
+                        </span>
+                      )}
+                    </div>
 
                     {/* Porcentaje de Descuento destacado */}
-                    <span className="font-extrabold text-white bg-error px-2 py-0.5 rounded-md text-[11px] shadow-sm tracking-tight">
+                    <span className="font-extrabold text-white bg-error px-2 py-0.5 rounded-md text-[11px] shadow-sm tracking-tight shrink-0">
                       {deal.tag}
                     </span>
                   </div>
@@ -1032,7 +1223,11 @@ export function TopDealsShowcase() {
                         {deal.christmasTag}
                       </span>
 
-                      {isTech ? (
+                      {isUnder50 ? (
+                        <span className="text-[10px] font-mono text-emerald-800 bg-emerald-100/70 px-1.5 py-0.5 rounded font-bold border border-emerald-300/50">
+                          Chollo &lt; $50
+                        </span>
+                      ) : isTech ? (
                         <span className="text-[10px] font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
                           Electrónicos
                         </span>
@@ -1083,15 +1278,15 @@ export function TopDealsShowcase() {
                     <div className="flex items-baseline justify-between">
                       <div>
                         <span className="text-xs text-on-surface-variant line-through mr-1.5">
-                          ${deal.originalPrice.toFixed(0)}
+                          ${deal.originalPrice.toFixed(deal.originalPrice % 1 === 0 ? 0 : 2)}
                         </span>
                         <span className="text-xl font-extrabold font-display text-primary-container">
-                          ${deal.dealPrice.toFixed(0)}{' '}
+                          ${deal.dealPrice.toFixed(deal.dealPrice % 1 === 0 ? 0 : 2)}{' '}
                           <span className="text-xs font-normal text-on-surface-variant">USD</span>
                         </span>
                       </div>
                       <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
-                        Ahorras ${deal.savings.toFixed(0)}
+                        Ahorras ${deal.savings.toFixed(deal.savings % 1 === 0 ? 0 : 2)}
                       </span>
                     </div>
 
