@@ -36,27 +36,14 @@ export function HeroSection({
       {/* Contenido Central */}
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
         
-        {/* Badge Temático: Black Friday + Navidad */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 text-white text-xs font-semibold border border-white/20 backdrop-blur-md shadow-sm">
-          <span className="text-secondary-fixed">🎄 Compras Navideñas</span>
-          <span className="text-white/40">•</span>
-          <span className="text-amber-300 font-bold">Black Friday NYC</span>
-          <span className="text-white/40">•</span>
-          <span className="text-slate-200">Vuelo Directo a Bolivia</span>
-        </div>
-
         {/* Titular Principal */}
-        <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight drop-shadow-md">
-          Magia Navideña desde Manhattan: <br />
-          <span className="text-secondary-fixed">Aprovecha hasta 70% OFF en Black Friday</span> <br className="hidden sm:inline" />
-          <span className="text-white">y recíbelo en Bolivia antes de Navidad.</span>
+        <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight drop-shadow-md max-w-3xl mx-auto">
+          Tus compras de Navidad, directo de las tiendas de <span className="text-secondary-fixed">Nueva York</span> a tus manos.
         </h1>
 
-        {/* Subtítulo enfocado en regalos y tiendas físicas */}
-        <p className="text-sm sm:text-base text-slate-200 max-w-2xl mx-auto font-sans leading-relaxed drop-shadow-sm">
-          Lleva la magia de la 5ta Avenida y Manhattan a tu hogar. Compramos tus regalos en{' '}
-          <strong className="text-white font-semibold">Apple, Sephora, Nike, Best Buy y Coach</strong>{' '}
-          con gestión directa y entregas garantizadas en Bolivia desde el 4 de Diciembre.
+        {/* Subtítulo */}
+        <p className="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto font-sans leading-relaxed drop-shadow-sm">
+          Aprovecha hasta un <strong className="text-white font-semibold">70% OFF real por Black Friday</strong>. Productos 100% originales comprados en los principales centros comerciales de EE.UU.
         </p>
 
         {/* Acciones principales */}

@@ -7,9 +7,9 @@ import { FAQSection } from '@/components/landing/FAQSection';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Compras EEUU | Grandes Ofertas Black Friday y Envíos a Bolivia',
+  title: 'Compras EEUU | Tus compras de Navidad, directo de Nueva York a tus manos',
   description:
-    'Ofertas oficiales en Apple, Nike, Sephora, Coach y Best Buy Estados Unidos con entrega directa en Bolivia.',
+    'Aprovecha hasta un 70% OFF real por Black Friday. Productos 100% originales comprados en los principales centros comerciales de EE.UU.',
 };
 
 export default function HomePage() {
