@@ -347,55 +347,242 @@ export const TOP_DEALS: DealItem[] = [
   },
 ];
 
-// Fechas Clave de Compra en eCommerce de EE.UU.
-export const ECOMMERCE_DATES_GUIDE = [
+// =========================================================================
+// RENDERIZADOR DE LOGOS VECTORIALES OFICIALES
+// =========================================================================
+export function BrandLogo({ type, className = 'w-7 h-7' }: { type: string; className?: string }) {
+  switch (type) {
+    case 'sephora':
+      return (
+        <div className="bg-black text-white px-2 py-1 rounded-lg flex items-center justify-center font-serif text-[11px] font-black tracking-[0.25em] shadow-xs">
+          SEPHORA
+        </div>
+      );
+    case 'macys':
+      return (
+        <div className="bg-white p-1 rounded-lg flex items-center justify-center border border-red-100 shadow-xs">
+          <svg viewBox="0 0 24 24" className="w-5 h-5 fill-[#E11A2B]">
+            <path d="M12 2l2.95 6.63 7.19.6-5.45 4.8 1.62 7.02L12 17.38l-6.31 3.67 1.62-7.02-5.45-4.8 7.19-.6z" />
+          </svg>
+        </div>
+      );
+    case 'nike':
+      return (
+        <div className="bg-black text-white p-1.5 rounded-lg flex items-center justify-center shadow-xs">
+          <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
+            <path d="M21.7 5.3c-2.3 2.4-5.7 5.6-10.4 9.1-2.6 1.9-4.5 2.9-5.7 2.9-.9 0-1.6-.4-1.9-1.3-.5-1.1-.1-2.7 1-4.6 1.1-2 2.7-3.7 4.5-5.2.6-.5 1-.5 1.3-.2.3.3.2.7-.3 1.4-1.7 2.1-2.9 3.9-3.4 5.5-.3.8-.3 1.4 0 1.8.2.3.7.4 1.3.4 1-.1 2.4-.8 4.2-2.3 4.4-3.6 7.8-6.7 10.2-9.2.2-.2.5-.2.7 0 .1.2.1.5-.1.7z" />
+          </svg>
+        </div>
+      );
+    case 'bestbuy':
+      return (
+        <div className="bg-[#FFE000] text-black px-1.5 py-0.5 rounded-lg flex flex-col items-center justify-center border border-amber-400/50 leading-none shadow-xs">
+          <span className="text-[8px] font-sans font-black tracking-tighter">BEST</span>
+          <span className="text-[8px] font-sans font-black tracking-tighter">BUY</span>
+        </div>
+      );
+    case 'coach':
+      return (
+        <div className="bg-[#1f1a17] text-[#e0b868] px-2 py-0.5 rounded-lg flex flex-col items-center justify-center border border-[#e0b868]/30 shadow-xs">
+          <span className="text-[9.5px] font-serif font-black tracking-widest leading-none">COACH</span>
+          <span className="text-[5.5px] tracking-wider text-slate-300 font-sans">NEW YORK</span>
+        </div>
+      );
+    case 'amazon':
+      return (
+        <div className="bg-[#131921] text-white px-2 py-1 rounded-lg flex flex-col items-center justify-center border border-white/10 shadow-xs">
+          <span className="text-[10px] font-sans font-black leading-none tracking-tight">amazon</span>
+          <svg viewBox="0 0 36 8" className="w-6 h-1.5 mt-0.5">
+            <path d="M2 2 Q 18 10 34 2" fill="none" stroke="#FF9900" strokeWidth="2.5" strokeLinecap="round" />
+            <path d="M31 1 L 35 2 L 32 5 Z" fill="#FF9900" />
+          </svg>
+        </div>
+      );
+    case 'target':
+      return (
+        <div className="bg-white p-1 rounded-lg flex items-center justify-center border border-red-100 shadow-xs">
+          <svg viewBox="0 0 24 24" className="w-5 h-5">
+            <circle cx="12" cy="12" r="11" fill="#CC0000" />
+            <circle cx="12" cy="12" r="7.33" fill="#FFFFFF" />
+            <circle cx="12" cy="12" r="3.67" fill="#CC0000" />
+          </svg>
+        </div>
+      );
+    case 'apple':
+      return (
+        <div className="bg-black text-white p-1.5 rounded-lg flex items-center justify-center shadow-xs">
+          <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.2c.67-.82 1.13-1.96 1-3.1-.98.04-2.16.66-2.86 1.48-.61.71-1.15 1.87-1.01 2.98 1.09.08 2.2-.54 2.87-1.36z" />
+          </svg>
+        </div>
+      );
+    default:
+      return (
+        <div className="w-6 h-6 rounded-lg bg-surface-container-high flex items-center justify-center text-xs font-bold text-on-surface">
+          ★
+        </div>
+      );
+  }
+}
+
+// =========================================================================
+// CALENDARIO ECOMMERCE: Fechas Específicas por Comercio en Noviembre
+// =========================================================================
+export interface StoreEcommerceItem {
+  id: string;
+  name: string;
+  subchannel: string;
+  logoType: 'sephora' | 'macys' | 'nike' | 'bestbuy' | 'coach' | 'amazon' | 'target' | 'apple';
+  categoryTag: 'Belleza' | 'Moda' | 'Tecnología' | 'Outlets' | 'Variedad';
+  status: 'Activo en Noviembre' | 'Próximo Drop' | 'Doorbuster Oficial';
+  isActiveNow: boolean;
+  statusBadge: string;
+  novemberDates: string; // Fechas exactas del mes de noviembre
+  eventWindowDetail: string;
+  keyDiscount: string;
+  starProducts: string;
+  taxNoteNYC?: string;
+  officialUrl: string;
+}
+
+export const STORE_ECOMMERCE_CALENDAR: StoreEcommerceItem[] = [
+  // 1. SEPHORA (Mencionada por el usuario - activa en este mes)
   {
-    phase: '1. Early Black Friday',
-    dates: '17 al 26 de Noviembre',
-    storeHighlights: 'Amazon, Target, Best Buy, Coach Outlet',
-    description: 'Preventas online con lanzamientos escalonados. Momento ideal para asegurar stock de marcas americanas antes de que se agoten.',
-    badge: 'Stock Asegurado',
-    color: 'border-blue-500/40 bg-blue-500/5',
+    id: 'sephora-us',
+    name: 'Sephora USA',
+    subchannel: 'Web & App Oficial',
+    logoType: 'sephora',
+    categoryTag: 'Belleza',
+    status: 'Activo en Noviembre',
+    isActiveNow: true,
+    statusBadge: '🟢 ACTIVO ESTE MES',
+    novemberDates: '1 al 11 Nov (Holiday Savings) & 24 Nov - 1 Dic (Black Friday Drops)',
+    eventWindowDetail: '30% Sephora Collection + hasta 50% OFF en sets festivos y cofres de fin de año.',
+    keyDiscount: 'Hasta 50% OFF en Lujo & Perfumes',
+    starProducts: 'Sol de Janeiro, Rare Beauty, Dyson Airwrap, Olaplex, Fenty',
+    officialUrl: 'https://www.sephora.com/beauty/black-friday',
   },
+
+  // 2. MACY'S (Mencionada por el usuario - activa en este mes)
   {
-    phase: '2. Thanksgiving Web Drop',
-    dates: 'Jueves 27 de Noviembre',
-    storeHighlights: "Macy's, Nike US, Levi's, Sephora",
-    description: 'Las tiendas físicas en Nueva York cierran por feriado, pero sus páginas web activan los mayores cupones y Doorbusters a las 00:00 EST.',
-    badge: 'Apertura Doorbusters',
-    color: 'border-amber-500/40 bg-amber-500/5',
+    id: 'macys-herald-sq',
+    name: "Macy's",
+    subchannel: "Herald Sq Manhattan & Web",
+    logoType: 'macys',
+    categoryTag: 'Moda',
+    status: 'Activo en Noviembre',
+    isActiveNow: true,
+    statusBadge: '🟢 ACTIVO ESTE MES',
+    novemberDates: '10 al 18 Nov (Early Access) & 19 al 30 Nov (Doorbusters Oficiales)',
+    eventWindowDetail: 'El mayor surtido de abrigos de invierno y perfumería con rebajas de hasta 70%.',
+    keyDiscount: '60% a 70% OFF + 0% Sales Tax NYC',
+    starProducts: 'Puffers Tommy Hilfiger ($79), Calvin Klein, Maletas Samsonite',
+    taxNoteNYC: '0% Sales Tax en NYC en prendas individuales bajo $110 USD',
+    officialUrl: 'https://www.macys.com/p/black-friday/',
   },
+
+  // 3. NIKE (Mencionada por el usuario - fechas específicas)
   {
-    phase: '3. Black Friday Oficial',
-    dates: 'Viernes 28 de Noviembre',
-    storeHighlights: 'Todas las tiendas de EE.UU. (Web & Outlets)',
-    description: 'Pico mundial de ventas. Descuentos de hasta 77% en carteras, zapatillas, abrigos y tecnología. Las mejores liquidaciones en vivo.',
-    badge: 'Máximas Rebajas',
-    color: 'border-red-500/40 bg-red-500/5',
+    id: 'nike-us',
+    name: 'Nike US',
+    subchannel: 'House of Innovation 5th Ave & Web',
+    logoType: 'nike',
+    categoryTag: 'Moda',
+    status: 'Próximo Drop',
+    isActiveNow: false,
+    statusBadge: '🟡 PRÓXIMO DROP (17 Nov)',
+    novemberDates: '17 al 23 Nov (Nike Members Early) & 24 al 30 Nov (Cyber Week Drops)',
+    eventWindowDetail: 'Cupones digitales exclusivos para miembros en calzado de running, Jordan y ropa deportiva.',
+    keyDiscount: 'Hasta 60% OFF en App & Web',
+    starProducts: 'Air Zoom Pegasus 40/41 ($79), Air Jordan 1, Nike Tech Fleece',
+    taxNoteNYC: '0% Sales Tax en calzado bajo $110 USD en Nueva York',
+    officialUrl: 'https://www.nike.com/w/black-friday-sale',
   },
+
+  // 4. BEST BUY (Mencionada por el usuario - activa en este mes)
   {
-    phase: '4. Cyber Weekend',
-    dates: '29 y 30 de Noviembre',
-    storeHighlights: 'Woodbury Outlets Online, Michael Kors, Columbia',
-    description: 'Remates especiales de fin de semana para compras de moda y regalos familiares que no se agotaron el viernes.',
-    badge: 'Liquidación Outlets',
-    color: 'border-purple-500/40 bg-purple-500/5',
+    id: 'bestbuy-us',
+    name: 'Best Buy USA',
+    subchannel: 'Union Square, 5th Ave & Web',
+    logoType: 'bestbuy',
+    categoryTag: 'Tecnología',
+    status: 'Activo en Noviembre',
+    isActiveNow: true,
+    statusBadge: '🟢 ACTIVO ESTE MES',
+    novemberDates: '8 al 20 Nov (Early Doorbusters) & 21 al 30 Nov (Black Friday Week)',
+    eventWindowDetail: 'Lanzamientos semanales de rebajas directas en efectivo en laptops, consolas y audio de alta fidelidad.',
+    keyDiscount: 'Ahorro hasta $500 USD directo en caja',
+    starProducts: 'MacBook Air M2 ($749), Sony WH-1000XM5 ($248), Smart TVs OLED 4K',
+    officialUrl: 'https://www.bestbuy.com/site/black-friday/sale-event/pcmcat225600050000.c',
   },
+
+  // 5. COACH OUTLET (Top Marca Americana)
   {
-    phase: '5. Cyber Monday',
-    dates: 'Lunes 1 de Diciembre',
-    storeHighlights: 'Best Buy, B&H Photo, Amazon, Sephora',
-    description: 'El día rey del comercio electrónico estadounidense. Ofertas insuperables en laptops, auriculares, consolas y cofres de belleza.',
-    badge: 'Récord Online',
-    color: 'border-emerald-500/40 bg-emerald-500/5',
+    id: 'coach-outlet-ny',
+    name: 'Coach Outlet NY',
+    subchannel: 'Woodbury Common & Web Oficial',
+    logoType: 'coach',
+    categoryTag: 'Outlets',
+    status: 'Próximo Drop',
+    isActiveNow: false,
+    statusBadge: '🟡 PRÓXIMO DROP (15 Nov)',
+    novemberDates: '15 al 23 Nov (VIP Pre-Sale 70% OFF) & 24 Nov al 2 Dic (Cyber Week)',
+    eventWindowDetail: '70% de descuento en toda la tienda online + 20% a 25% OFF acumulado en el carrito de compras.',
+    keyDiscount: 'Hasta 77% OFF Acumulado',
+    starProducts: 'Cartera City Tote Signature ($89 USD), Rowan Satchel, Billeteras de cuero',
+    taxNoteNYC: 'Ahorro masivo en liquidación de diseñador estadounidense',
+    officialUrl: 'https://www.coachoutlet.com/shop/black-friday-deals',
   },
+
+  // 6. AMAZON USA
   {
-    phase: '6. Cierre de Envíos Navideños',
-    dates: '4 de Diciembre (NYC)',
-    storeHighlights: 'Almacén Nueva York ➔ Vuelo Directo Bolivia',
-    description: 'Fecha límite de recepción de paquetes en nuestro casillero de Manhattan para garantizar entrega en Bolivia antes de Nochebuena.',
-    badge: 'Llega para Navidad',
-    color: 'border-secondary/40 bg-secondary/5',
+    id: 'amazon-us',
+    name: 'Amazon USA',
+    subchannel: 'Portal Principal & Prime Deals',
+    logoType: 'amazon',
+    categoryTag: 'Variedad',
+    status: 'Próximo Drop',
+    isActiveNow: false,
+    statusBadge: '🟡 PRÓXIMO DROP (17 Nov)',
+    novemberDates: '17 al 26 Nov (Early Black Friday) & 27 al 28 Nov (Black Friday 48 Horas)',
+    eventWindowDetail: 'Ofertas relámpago continuas que rotan cada 5 minutos en termos, gadgets y electrónica.',
+    keyDiscount: 'Doorbusters & Lightning Deals',
+    starProducts: 'Stanley Quencher 40oz ($29 USD), Kindle Paperwhite, Apple Watch Series 10',
+    officialUrl: 'https://www.amazon.com/blackfriday',
+  },
+
+  // 7. TARGET USA
+  {
+    id: 'target-us',
+    name: 'Target USA',
+    subchannel: 'Herald Sq & Web Nacional',
+    logoType: 'target',
+    categoryTag: 'Variedad',
+    status: 'Activo en Noviembre',
+    isActiveNow: true,
+    statusBadge: '🟢 ACTIVO ESTE MES',
+    novemberDates: '10 al 23 Nov (Early Holiday Deals) & 24 al 30 Nov (Black Friday Week)',
+    eventWindowDetail: 'Promociones anticipadas en bundles de videojuegos con juegos gratis y juguetes coleccionables.',
+    keyDiscount: 'Packs Gamer & Hasta 50% OFF',
+    starProducts: 'PS5 Slim Disc Bundle con Juego Triple A gratis ($449.99 USD), Nintendo Switch',
+    officialUrl: 'https://www.target.com/c/black-friday/-/N-55119',
+  },
+
+  // 8. APPLE STORE OFICIAL
+  {
+    id: 'apple-us',
+    name: 'Apple Store Oficial',
+    subchannel: 'Fifth Ave Cubo de Cristal & Web',
+    logoType: 'apple',
+    categoryTag: 'Tecnología',
+    status: 'Doorbuster Oficial',
+    isActiveNow: false,
+    statusBadge: '🔴 FECHA OFICIAL (28 Nov)',
+    novemberDates: '28 de Noviembre al 1 de Diciembre (Apple Shopping Event 4 Días)',
+    eventWindowDetail: 'Tarjetas de regalo oficiales de Apple de hasta $200 USD para canjear en futuras compras o suscripciones.',
+    keyDiscount: 'Apple Gift Cards hasta $200 USD',
+    starProducts: 'MacBook Air M3, iPad 10th Gen, iPhone 16, AirPods Max, Apple Watch',
+    officialUrl: 'https://www.apple.com/shop/gifts/shopping-event',
   },
 ];
 
@@ -406,8 +593,21 @@ export function TopDealsShowcase() {
 
   const [sortBy, setSortBy] = useState<'discount' | 'savings' | 'bfScore'>('discount');
   const [showCalendar, setShowCalendar] = useState<boolean>(true);
+  const [storeFilter, setStoreFilter] = useState<'Todos' | 'Activos Noviembre' | 'Moda' | 'Tecnología' | 'Belleza'>('Todos');
 
-  // Filtrado y Ordenamiento
+  // Filtrado de tiendas del calendario
+  const filteredStores = useMemo(() => {
+    return STORE_ECOMMERCE_CALENDAR.filter((store) => {
+      if (storeFilter === 'Todos') return true;
+      if (storeFilter === 'Activos Noviembre') return store.isActiveNow;
+      if (storeFilter === 'Moda') return store.categoryTag === 'Moda' || store.categoryTag === 'Outlets';
+      if (storeFilter === 'Tecnología') return store.categoryTag === 'Tecnología';
+      if (storeFilter === 'Belleza') return store.categoryTag === 'Belleza';
+      return true;
+    });
+  }, [storeFilter]);
+
+  // Filtrado y Ordenamiento de Productos
   const processedDeals = useMemo(() => {
     // 1. Filtrar por categoría
     let list = TOP_DEALS.filter((deal) => {
@@ -422,8 +622,7 @@ export function TopDealsShowcase() {
     });
 
     // 2. Ordenar manteniendo los requerimientos:
-    // Si la categoría es 'Todas', mostramos marcas americanas / moda primero ordenadas por la opción seleccionada,
-    // y dejamos los electrónicos SIEMPRE AL FINAL de la lista.
+    // En 'Todas', marcas americanas y mejores ofertas primero, electrónicos siempre al final
     if (selectedCategory === 'Todas') {
       const nonTech = list.filter((d) => d.category !== 'Tech' && d.category !== 'Gaming');
       const tech = list.filter((d) => d.category === 'Tech' || d.category === 'Gaming');
@@ -526,71 +725,161 @@ export function TopDealsShowcase() {
         </div>
 
         {/* ========================================================================= */}
-        {/* CALENDARIO ECOMMERCE BLACK FRIDAY: Fechas Clave de Compra Online en USA   */}
+        {/* CALENDARIO ECOMMERCE BLACK FRIDAY: Fechas Específicas por Comercio (Sephora, Macy's, Nike, etc.) */}
         {/* ========================================================================= */}
-        <div className="bg-gradient-to-br from-[#0c182c] via-[#0f213a] to-[#0a1424] rounded-3xl p-5 sm:p-7 text-white border border-white/10 shadow-lg relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#0a1424] via-[#0c1c33] to-[#08101e] rounded-3xl p-5 sm:p-7 text-white border border-white/10 shadow-xl relative overflow-hidden">
           {/* Luz ambiental sutil */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
 
-          <div className="relative space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-secondary/20 border border-secondary/40 text-secondary-fixed flex items-center justify-center shrink-0">
-                  <Icon name="event" size={20} />
+          <div className="relative space-y-5">
+            {/* Header del Calendario por Tiendas */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-secondary/25 border border-secondary/50 text-secondary-fixed flex items-center justify-center shrink-0 shadow-inner">
+                  <Icon name="calendar_month" size={24} />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <h3 className="font-display font-bold text-base sm:text-lg text-white">
-                      Calendario eCommerce Black Friday USA 2026 / 2025
+                      Calendario eCommerce Black Friday USA: Fechas por Comercio Oficial
                     </h3>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
-                      Fechas Críticas de Compra Online
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 animate-pulse">
+                      ● Activos en este mes (Noviembre)
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    Conoce exactamente cuándo se liberan los descuentos en las webs oficiales para no quedarte sin stock de tallas y colores.
+                  <p className="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                    Fechas específicas de apertura de ofertas online en <strong>Sephora, Macy&apos;s, Nike, Best Buy, Coach, Amazon, Target y Apple</strong>. Enlaces oficiales directos para comprar por tu cuenta o encargar con Compra Asistida.
                   </p>
                 </div>
               </div>
 
               <button
                 onClick={() => setShowCalendar(!showCalendar)}
-                className="self-start sm:self-auto px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs text-slate-200 font-semibold transition-all flex items-center gap-1.5 border border-white/15"
+                className="self-start sm:self-auto px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs text-slate-200 font-bold transition-all flex items-center gap-1.5 border border-white/15 shrink-0"
               >
-                <Icon name={showCalendar ? 'expand_less' : 'expand_more'} size={16} />
-                <span>{showCalendar ? 'Minimizar Calendario' : 'Ver Calendario Completo'}</span>
+                <Icon name={showCalendar ? 'expand_less' : 'expand_more'} size={17} />
+                <span>{showCalendar ? 'Ocultar Calendario' : 'Ver Calendario de Tiendas'}</span>
               </button>
             </div>
 
-            {/* Grid de Fechas eCommerce */}
+            {/* Filtros por Categoría de Tienda */}
             {showCalendar && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2 animate-fadeIn">
-                {ECOMMERCE_DATES_GUIDE.map((item, idx) => (
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                <div className="flex items-center gap-1 bg-white/10 p-1 rounded-xl overflow-x-auto max-w-full">
+                  {(
+                    ['Todos', 'Activos Noviembre', 'Moda', 'Tecnología', 'Belleza'] as const
+                  ).map((filter) => (
+                    <button
+                      key={filter}
+                      onClick={() => setStoreFilter(filter)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap ${
+                        storeFilter === filter
+                          ? 'bg-white text-slate-900 font-bold shadow-xs'
+                          : 'text-slate-300 hover:text-white'
+                      }`}
+                    >
+                      {filter === 'Activos Noviembre' && '🟢 '}
+                      {filter}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="text-[11px] text-slate-400 flex items-center gap-1 font-mono">
+                  <span>Mostrando {filteredStores.length} de {STORE_ECOMMERCE_CALENDAR.length} comercios oficiales</span>
+                </div>
+              </div>
+            )}
+
+            {/* Grid de Tiendas con Logos, Fechas en Noviembre y Enlaces Oficiales */}
+            {showCalendar && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 animate-fadeIn">
+                {filteredStores.map((store) => (
                   <div
-                    key={idx}
-                    className={`rounded-2xl p-4 border transition-all hover:border-white/30 backdrop-blur-sm ${item.color}`}
+                    key={store.id}
+                    className="bg-white/5 hover:bg-white/10 rounded-2xl p-4 border border-white/10 hover:border-secondary/60 transition-all flex flex-col justify-between space-y-3.5 backdrop-blur-sm group"
                   >
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="font-display font-bold text-xs text-white">
-                        {item.phase}
-                      </span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/15 text-slate-100 font-bold">
-                        {item.badge}
-                      </span>
+                    <div className="space-y-3">
+                      {/* Fila Superior: Logo de Marca y Estado */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <BrandLogo type={store.logoType} />
+                          <div className="leading-none">
+                            <span className="font-display font-bold text-xs text-white block">
+                              {store.name}
+                            </span>
+                            <span className="text-[10px] text-slate-400">
+                              {store.subchannel}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Badge de Estado */}
+                        <span
+                          className={`text-[9.5px] font-mono px-2 py-0.5 rounded-md font-bold shrink-0 ${
+                            store.isActiveNow
+                              ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                              : 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
+                          }`}
+                        >
+                          {store.statusBadge}
+                        </span>
+                      </div>
+
+                      {/* Fechas en este mes (Noviembre) */}
+                      <div className="bg-amber-400/10 border border-amber-400/25 rounded-xl p-2.5 space-y-1">
+                        <div className="flex items-center gap-1.5 text-amber-300 text-[10px] font-bold uppercase tracking-wider">
+                          <Icon name="event_available" size={13} className="text-amber-400" />
+                          <span>Fechas en Noviembre:</span>
+                        </div>
+                        <p className="text-xs font-bold text-white leading-snug">
+                          {store.novemberDates}
+                        </p>
+                      </div>
+
+                      {/* Descuentos & Productos Clave */}
+                      <div className="space-y-1.5 text-xs">
+                        <div className="flex items-center justify-between gap-1 text-[11px]">
+                          <span className="text-secondary-fixed font-bold">
+                            {store.keyDiscount}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-slate-300 leading-relaxed">
+                          {store.eventWindowDetail}
+                        </p>
+
+                        <div className="text-[10px] text-slate-400 pt-1 border-t border-white/10 flex items-start gap-1">
+                          <span className="text-secondary-fixed font-bold shrink-0">Top:</span>
+                          <span className="text-slate-300 line-clamp-1">{store.starProducts}</span>
+                        </div>
+
+                        {store.taxNoteNYC && (
+                          <div className="text-[9.5px] text-emerald-300/90 font-medium bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
+                            ✓ {store.taxNoteNYC}
+                          </div>
+                        )}
+                      </div>
                     </div>
 
-                    <div className="text-xs font-bold text-amber-300 mb-1 flex items-center gap-1">
-                      <Icon name="schedule" size={13} />
-                      <span>{item.dates}</span>
-                    </div>
+                    {/* Acciones: Link Oficial de la Tienda y Botón de Pedido */}
+                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+                      <a
+                        href={store.officialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`Visitar web oficial de ofertas en ${store.name}`}
+                        className="py-1.5 px-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-sans text-[11px] font-semibold flex items-center justify-center gap-1 transition-all border border-white/15 text-center truncate"
+                      >
+                        <span className="truncate">Link Tienda</span>
+                        <Icon name="open_in_new" size={12} className="shrink-0" />
+                      </a>
 
-                    <p className="text-[11px] text-slate-200 leading-relaxed mb-2">
-                      {item.description}
-                    </p>
-
-                    <div className="text-[10px] text-slate-400 flex items-center gap-1 border-t border-white/10 pt-2 font-mono">
-                      <Icon name="storefront" size={12} className="text-secondary-fixed shrink-0" />
-                      <span className="truncate">{item.storeHighlights}</span>
+                      <Link
+                        href={`/registro?store=${encodeURIComponent(store.name)}&url=${encodeURIComponent(store.officialUrl)}`}
+                        className="py-1.5 px-2 rounded-xl bg-secondary hover:bg-secondary/90 text-white font-sans text-[11px] font-bold flex items-center justify-center gap-1 transition-all shadow-xs text-center truncate"
+                      >
+                        <span className="truncate">Pedir aquí</span>
+                        <Icon name="arrow_forward" size={12} className="shrink-0" />
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -598,18 +887,18 @@ export function TopDealsShowcase() {
             )}
 
             {/* Tip Operativo para Bolivia */}
-            <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-300">
+            <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-300 border-t border-white/10">
               <span className="flex items-center gap-2">
                 <span className="text-amber-400 text-sm">💡</span>
                 <span>
-                  <strong>Recomendación logística:</strong> Si compras online por tu cuenta con tu tarjeta, envía tus paquetes a nuestro casillero en Manhattan antes del <strong>2 de Diciembre</strong> para asegurar su llegada en el vuelo directo a Bolivia.
+                  <strong>Tip de compra asistida:</strong> En tiendas con fechas activas este mes como <em>Sephora, Macy&apos;s y Best Buy</em>, las mejores ofertas de stock limitado se agotan en minutos. Envíanos el enlace oficial para reservar tu compra de inmediato.
                 </span>
               </span>
               <Link
                 href="/registro"
-                className="text-secondary-fixed hover:underline font-bold shrink-0 flex items-center gap-1"
+                className="text-secondary-fixed hover:underline font-bold shrink-0 flex items-center gap-1 self-start sm:self-auto"
               >
-                <span>Solicitar Casillero / Compra</span>
+                <span>Formulario de Compra Asistida</span>
                 <Icon name="arrow_forward" size={13} />
               </Link>
             </div>
