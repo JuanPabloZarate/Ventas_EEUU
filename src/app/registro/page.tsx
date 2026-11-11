@@ -6,8 +6,8 @@ import { Footer } from '@/components/layout/Footer';
 import { RegistroFlow } from '@/components/registration/RegistroFlow';
 
 export const metadata: Metadata = {
-  title: 'Registro de Compra o Pedido | NY2Bolivia',
-  description: 'Registro de compra online con ticket o solicitud de compra asistida en tienda de Nueva York.',
+  title: 'Registro de Compra o Pedido | Compras EEUU',
+  description: 'Registro de compra online con ticket o solicitud de compra asistida en tienda de Estados Unidos.',
 };
 
 export default function RegistroPage() {

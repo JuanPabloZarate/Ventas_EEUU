@@ -9,9 +9,9 @@ import { FAQSection } from '@/components/landing/FAQSection';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'NY2Bolivia | Ofertas Black Friday New York a Bolivia',
+  title: 'Compras EEUU | Grandes Ofertas Black Friday y Envíos a Bolivia',
   description:
-    'Ofertas oficiales en Apple, Nike, Sephora, Coach y Best Buy Nueva York con entrega directa en Bolivia.',
+    'Ofertas oficiales en Apple, Nike, Sephora, Coach y Best Buy Estados Unidos con entrega directa en Bolivia.',
 };
 
 export default function HomePage() {

@@ -6,7 +6,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  viewportFit: 'cover', // Enables env(safe-area-inset-*) on iOS Safari notched devices
+  viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#0B192C' },
     { media: '(prefers-color-scheme: dark)', color: '#0B192C' },
@@ -15,28 +15,29 @@ export const viewport: Viewport = {
 
 // Application Metadata
 export const metadata: Metadata = {
-  title: 'NY2Bolivia | Courier & Shopping Express New York - Bolivia',
+  title: 'Compras EEUU | Courier & Compras en Estados Unidos a Bolivia',
   description:
-    'Compras exclusivas de Black Friday en Manhattan (Apple, Sephora, Nike, B&H) con despacho directo a Bolivia antes de Navidad. Casillero NY y Compra Asistida.',
+    'Compras exclusivas en tiendas físicas y online de Estados Unidos (Apple, Sephora, Nike, B&H) con entrega directa en Bolivia antes de Navidad. Casillero postal y Compra Asistida con Compras EEUU.',
   keywords: [
+    'Compras EEUU',
+    'Compras Estados Unidos',
+    'Compras EEUU Bolivia',
     'Black Friday Bolivia',
-    'Courier New York Bolivia',
+    'Courier USA Bolivia',
     'Casillero New York',
     'Compra Asistida USA',
-    'Envios New York Bolivia',
+    'Envios USA Bolivia',
     'Apple Black Friday Bolivia',
-    'JFK Bolivia Courier',
-    'Andean Skyline Logistics',
   ],
-  authors: [{ name: 'Andean Skyline Logistics / NY2Bolivia' }],
-  metadataBase: new URL('https://ny2bolivia.com'),
+  authors: [{ name: 'Compras EEUU' }],
+  metadataBase: new URL('https://ny2bolivia-web.vercel.app'),
   openGraph: {
-    title: 'NY2Bolivia | Black Friday Manhattan a Bolivia',
+    title: 'Compras EEUU | Compras en Estados Unidos a Bolivia',
     description:
-      'Aprovecha hasta 70% OFF en New York. Te lo traemos a Bolivia antes de Navidad con vuelo directo JFK.',
+      'Ofertas en tiendas de Nueva York y EE.UU. con entrega directa en Bolivia antes de Navidad.',
     type: 'website',
     locale: 'es_BO',
-    siteName: 'NY2Bolivia Courier',
+    siteName: 'Compras EEUU',
   },
   icons: {
     icon: '/favicon.ico',

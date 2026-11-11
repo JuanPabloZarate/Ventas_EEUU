@@ -14,7 +14,7 @@ export function Navbar({
   className = '',
 }: NavbarProps) {
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    'Hola NY2Bolivia, deseo información para mis compras en New York.'
+    'Hola Compras EEUU, deseo información para mis compras en New York y EE.UU.'
   )}`;
 
   return (
@@ -24,13 +24,13 @@ export function Navbar({
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="h-14 sm:h-16 flex items-center justify-between gap-4">
           
-          {/* Logo Minimalista */}
+          {/* Logo Minimalista: Compras EEUU */}
           <Link href="/" className="flex items-center gap-2 group">
             <span className="font-display font-extrabold text-lg sm:text-xl tracking-tight text-primary-container">
-              NY2<span className="text-secondary">Bolivia</span>
+              Compras <span className="text-secondary">EEUU</span>
             </span>
             <span className="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-mono text-[10px] font-semibold">
-              JFK ✈ LPB/VVI
+              USA ✈ Bolivia
             </span>
           </Link>
 

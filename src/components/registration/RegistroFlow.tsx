@@ -112,7 +112,7 @@ export function RegistroFlow() {
   const getWhatsAppConfirmLink = () => {
     if (!createdOrder) return '';
     const phone = '59177012345';
-    let text = `Hola NY2Bolivia, completé mi registro #${createdOrder.id}.\n`;
+    let text = `Hola Compras EEUU, completé mi registro #${createdOrder.id}.\n`;
     text += `Nombre: ${clientName}\n`;
     text += `Ciudad: ${destinationCity}\n`;
     if (modality === 'prealert') {

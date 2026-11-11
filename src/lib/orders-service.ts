@@ -1,5 +1,5 @@
 /**
- * NY2Bolivia Web (Andean Skyline Logistics)
+ * Compras en Estados Unidos
  * Hybrid Orders Service Adapter: Firebase Firestore + Offline LocalStorage Mock
  * Target: src/lib/orders-service.ts
  *
