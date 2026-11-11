@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Icon } from '@/components/ui/Icon';
 import { ordersService } from '@/lib/orders-service';
-import type { Order, OrderModality, DeliveryMethod, CreateOrderInput } from '@/types/order';
+import type { Order, OrderModality, CreateOrderInput } from '@/types/order';
 
 export function RegistroFlow() {
   const searchParams = useSearchParams();
@@ -18,8 +18,6 @@ export function RegistroFlow() {
   const [clientName, setClientName] = useState('');
   const [clientPhone, setClientPhone] = useState('');
   const [destinationCity, setDestinationCity] = useState('Santa Cruz de la Sierra');
-  const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>('pickup');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
 
   // En caso Ecommerce ('prealert'): Ticket de compra / Factura y Tracking
   const [trackingNumber, setTrackingNumber] = useState('');
@@ -89,8 +87,7 @@ export function RegistroFlow() {
         clientName: clientName.trim(),
         clientPhone: cleanPhone,
         destinationCity,
-        deliveryMethod,
-        deliveryAddress: deliveryMethod === 'delivery' ? deliveryAddress.trim() : undefined,
+        deliveryMethod: 'pickup',
         modality,
         items: [
           {
@@ -232,7 +229,7 @@ export function RegistroFlow() {
               </div>
             </div>
 
-            <div>
+            <div className="sm:col-span-2">
               <label className="block text-xs font-medium text-on-surface-variant mb-1">
                 Ciudad en Bolivia
               </label>
@@ -252,51 +249,7 @@ export function RegistroFlow() {
                 <option value="Pando">Pando</option>
               </select>
             </div>
-
-            <div>
-              <label className="block text-xs font-medium text-on-surface-variant mb-1">
-                Entrega
-              </label>
-              <div className="grid grid-cols-2 gap-2 h-10">
-                <button
-                  type="button"
-                  onClick={() => setDeliveryMethod('pickup')}
-                  className={`rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all ${
-                    deliveryMethod === 'pickup'
-                      ? 'bg-secondary text-white font-bold'
-                      : 'bg-surface-container-low text-on-surface-variant'
-                  }`}
-                >
-                  <Icon name="store" size={14} />
-                  <span>Sucursal ($0)</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDeliveryMethod('delivery')}
-                  className={`rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all ${
-                    deliveryMethod === 'delivery'
-                      ? 'bg-secondary text-white font-bold'
-                      : 'bg-surface-container-low text-on-surface-variant'
-                  }`}
-                >
-                  <Icon name="local_shipping" size={14} />
-                  <span>Domicilio</span>
-                </button>
-              </div>
-            </div>
           </div>
-
-          {deliveryMethod === 'delivery' && (
-            <div className="pt-1">
-              <input
-                type="text"
-                value={deliveryAddress}
-                onChange={(e) => setDeliveryAddress(e.target.value)}
-                placeholder="Dirección exacta de entrega en tu ciudad..."
-                className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
-              />
-            </div>
-          )}
         </div>
 
         {/* 2. Sección Específica según la Modalidad Elegida */}
