@@ -16,13 +16,7 @@ export default function RegistroPage() {
   return (
     <div className="min-h-screen flex flex-col bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed antialiased">
       {/* 1. Urgency Top Bar */}
-      <AnnouncementBar
-        slotsRemaining={14}
-        totalSlots={50}
-        dateRange="23 Nov - 3 Dic"
-        deliveryDate="4 de Diciembre"
-        ctaHref="/registro"
-      />
+      <AnnouncementBar deliveryDate="4 de Diciembre" ctaHref="/registro" />
 
       {/* 2. Responsive Header Navigation */}
       <Navbar whatsappNumber="59177012345" />

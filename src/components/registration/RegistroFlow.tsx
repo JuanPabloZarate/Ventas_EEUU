@@ -2,110 +2,74 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { ModalityToggle } from './ModalityToggle';
-import { ClientProfileForm } from './ClientProfileForm';
-import { DynamicItemBuilder } from './DynamicItemBuilder';
-import { FileUploadDropzone } from './FileUploadDropzone';
-import { StickySummarySidebar } from './StickySummarySidebar';
-import { SuiteCodeModal } from './SuiteCodeModal';
-import { OrderSuccessModal } from './OrderSuccessModal';
-import { ordersService, calculateFinancials } from '@/lib/orders-service';
-import type { Order, OrderItem, OrderModality, DeliveryMethod, SpecialInstructions, CreateOrderInput } from '@/types/order';
 import { Icon } from '@/components/ui/Icon';
+import { ordersService } from '@/lib/orders-service';
+import type { Order, OrderModality, DeliveryMethod, CreateOrderInput } from '@/types/order';
 
 export function RegistroFlow() {
   const searchParams = useSearchParams();
 
-  // 1. Modality State
+  // Modalidad:
+  // 'prealert' = Pago ecommerce (ya compré online y adjunto ticket/tracking)
+  // 'assisted' = Compra asistida en tienda (personal shopper en Manhattan)
   const [modality, setModality] = useState<OrderModality>('prealert');
 
-  // 2. Client Profile State
+  // Datos del Cliente
   const [clientName, setClientName] = useState('');
   const [clientPhone, setClientPhone] = useState('');
-  const [suiteCode, setSuiteCode] = useState('');
   const [destinationCity, setDestinationCity] = useState('Santa Cruz de la Sierra');
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>('pickup');
   const [deliveryAddress, setDeliveryAddress] = useState('');
 
-  // 3. Dynamic Items State
-  const [items, setItems] = useState<OrderItem[]>([
-    {
-      id: 'item-1',
-      storeName: 'Apple Store 5th Ave',
-      category: 'Electrónica / Celulares / Laptops',
-      productName: '',
-      productUrl: '',
-      quantity: 1,
-      priceUSD: 0,
-      trackingUSA: '',
-    },
-  ]);
+  // En caso Ecommerce ('prealert'): Ticket de compra / Factura y Tracking
+  const [trackingNumber, setTrackingNumber] = useState('');
+  const [ticketFile, setTicketFile] = useState<File | null>(null);
 
-  // 4. Instructions & Invoice File
-  const [specialInstructions] = useState<SpecialInstructions>({
-    optimizeWeight: true,
-    photoInspection: true,
-    holidayPackaging: false,
-  });
-  const [invoiceFile, setInvoiceFile] = useState<File | null>(null);
+  // En caso Compra Asistida ('assisted'): Item a comprar y Presupuesto / Fondos
+  const [itemDescription, setItemDescription] = useState('');
+  const [itemStore, setItemStore] = useState('Apple Store 5th Ave');
+  const [itemUrl, setItemUrl] = useState('');
+  const [estimatedBudgetUSD, setEstimatedBudgetUSD] = useState<number>(0);
+  const [itemNotes, setItemNotes] = useState('');
 
-  // 5. UI Modals & Submission State
-  const [suiteModalOpen, setSuiteModalOpen] = useState(false);
+  // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [createdOrder, setCreatedOrder] = useState<Order | null>(null);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errorMsg, setErrorMsg] = useState('');
 
-  // 6. Ingest search parameters
+  // Ingest search params from deals
   useEffect(() => {
     const qModality = searchParams.get('modality');
     if (qModality === 'assisted' || qModality === 'prealert') {
       setModality(qModality);
     }
-
     const qStore = searchParams.get('store');
     const qUsd = searchParams.get('usd');
-
-    if (qStore || qUsd) {
-      setItems((prev) => [
-        {
-          ...prev[0],
-          storeName: qStore || prev[0].storeName,
-          priceUSD: qUsd ? parseFloat(qUsd) || prev[0].priceUSD : prev[0].priceUSD,
-        },
-        ...prev.slice(1),
-      ]);
+    if (qStore) {
+      setItemStore(qStore);
+      setModality('assisted');
+    }
+    if (qUsd) {
+      setEstimatedBudgetUSD(parseFloat(qUsd) || 0);
     }
   }, [searchParams]);
 
-  // Financials calculation
-  const financials = calculateFinancials(
-    items,
-    modality === 'prealert' ? 0 : 8,
-    20.00,
-    6.96
-  );
-
-  // Validation
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg('');
 
     if (!clientName.trim()) {
-      newErrors.clientName = 'Ingresa el nombre completo del destinatario.';
+      setErrorMsg('Por favor ingresa tu nombre completo.');
+      return;
     }
-
     const cleanPhone = clientPhone.replace(/\D/g, '');
     if (!cleanPhone || cleanPhone.length < 8) {
-      newErrors.clientPhone = 'Ingresa un número de celular de 8 dígitos de Bolivia.';
+      setErrorMsg('Por favor ingresa un número de WhatsApp válido (8 dígitos).');
+      return;
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // Submit Order
-  const handleSubmit = async () => {
-    if (!validateForm()) {
-      window.scrollTo({ top: 120, behavior: 'smooth' });
+    if (modality === 'assisted' && !itemDescription.trim()) {
+      setErrorMsg('Por favor describe el producto que deseas que compremos en la tienda de Nueva York.');
       return;
     }
 
@@ -113,131 +77,443 @@ export function RegistroFlow() {
     try {
       const orderInput: CreateOrderInput = {
         clientName: clientName.trim(),
-        clientPhone: clientPhone.trim(),
+        clientPhone: cleanPhone,
         destinationCity,
         deliveryMethod,
         deliveryAddress: deliveryMethod === 'delivery' ? deliveryAddress.trim() : undefined,
         modality,
-        items,
-        specialInstructions,
-        invoiceFileName: invoiceFile ? invoiceFile.name : undefined,
+        items: [
+          {
+            storeName: modality === 'assisted' ? itemStore : 'Compra Online Ecommerce',
+            category: 'Artículos Seleccionados',
+            productName: modality === 'assisted' ? itemDescription.trim() : 'Paquete Comprado Online',
+            productUrl: modality === 'assisted' ? itemUrl.trim() : undefined,
+            quantity: 1,
+            priceUSD: modality === 'assisted' ? estimatedBudgetUSD : 0,
+            trackingUSA: modality === 'prealert' ? trackingNumber.trim() : undefined,
+            notes: itemNotes.trim() || undefined,
+          },
+        ],
+        trackingUSA: modality === 'prealert' ? trackingNumber.trim() : undefined,
+        invoiceFileName: ticketFile ? ticketFile.name : undefined,
       };
 
       const newOrder = await ordersService.createOrder(orderInput);
       setCreatedOrder(newOrder);
     } catch (err) {
-      console.error('Error submitting order:', err);
-      alert('Hubo un inconveniente al registrar la orden. Por favor intenta de nuevo.');
+      console.error(err);
+      setErrorMsg('Ocurrió un error al procesar tu solicitud. Por favor intenta de nuevo.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  // WhatsApp link for instant coordination
+  const getWhatsAppConfirmLink = () => {
+    if (!createdOrder) return '';
+    const phone = '59177012345';
+    let text = `Hola NY2Bolivia, completé mi registro #${createdOrder.id}.\n`;
+    text += `Nombre: ${clientName}\n`;
+    text += `Ciudad: ${destinationCity}\n`;
+    if (modality === 'prealert') {
+      text += `Tipo: Ya compré online (Ticket adjunto)\n`;
+      text += `Tracking: ${trackingNumber || 'Por confirmar'}`;
+    } else {
+      text += `Tipo: Compra Asistida en Tienda NYC\n`;
+      text += `Tienda: ${itemStore}\n`;
+      text += `Producto: ${itemDescription}\n`;
+      text += `Fondos / Presupuesto: $${estimatedBudgetUSD} USD (Bs. ${(estimatedBudgetUSD * 6.96).toFixed(0)})`;
+    }
+    return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+  };
+
   return (
-    <div className="space-y-6">
-      {/* Minimal Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-outline-variant/20">
+    <div className="max-w-2xl mx-auto space-y-6">
+      
+      {/* Título y Selector de Tipo */}
+      <div className="space-y-4">
         <div>
-          <h1 className="text-2xl font-display font-bold text-on-surface tracking-tight">
-            Registro de Envío y Pre-Alerta
+          <h1 className="text-2xl sm:text-3xl font-display font-bold text-on-surface tracking-tight">
+            Registrar Envío o Pedido
           </h1>
-          <p className="text-xs sm:text-sm text-on-surface-variant mt-0.5">
-            Ingresa los datos para recepción en almacén de New York y entrega en Bolivia.
+          <p className="text-xs sm:text-sm text-on-surface-variant mt-1">
+            Elige si ya compraste en una web de EE.UU. o si requieres que vayamos a una tienda de Nueva York.
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setSuiteModalOpen(true)}
-          className="self-start sm:self-auto px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-xs font-semibold text-secondary flex items-center gap-1.5 transition-all border border-outline-variant/20"
-        >
-          <Icon name="warehouse" size={14} />
-          <span>Ver Dirección de Casillero en NY</span>
-        </button>
+        {/* Selector de 2 opciones simplificado */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-1.5 bg-surface-container-low rounded-2xl border border-outline-variant/30">
+          <button
+            type="button"
+            onClick={() => setModality('prealert')}
+            className={`p-3.5 rounded-xl text-left transition-all flex items-start gap-3 ${
+              modality === 'prealert'
+                ? 'bg-surface text-on-surface shadow-xs font-bold border border-secondary/40'
+                : 'text-on-surface-variant hover:text-on-surface'
+            }`}
+          >
+            <div className={`p-2 rounded-lg shrink-0 ${modality === 'prealert' ? 'bg-secondary text-white' : 'bg-surface-container'}`}>
+              <Icon name="receipt_long" size={18} />
+            </div>
+            <div>
+              <p className="text-sm">Ya compré online</p>
+              <p className="text-[11px] font-normal text-on-surface-variant">Tengo el ticket o factura para envío</p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setModality('assisted')}
+            className={`p-3.5 rounded-xl text-left transition-all flex items-start gap-3 ${
+              modality === 'assisted'
+                ? 'bg-surface text-on-surface shadow-xs font-bold border border-secondary/40'
+                : 'text-on-surface-variant hover:text-on-surface'
+            }`}
+          >
+            <div className={`p-2 rounded-lg shrink-0 ${modality === 'assisted' ? 'bg-secondary text-white' : 'bg-surface-container'}`}>
+              <Icon name="storefront" size={18} />
+            </div>
+            <div>
+              <p className="text-sm">Compra Asistida en Tienda</p>
+              <p className="text-[11px] font-normal text-on-surface-variant">Compramos el item por ti en Manhattan</p>
+            </div>
+          </button>
+        </div>
       </div>
 
-      {/* Main 2-Column Responsive Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      {/* Formulario */}
+      <form onSubmit={handleSubmit} className="bg-surface rounded-2xl p-5 sm:p-6 border border-outline-variant/30 space-y-5">
         
-        {/* Form Controls (8 Cols) */}
-        <div className="lg:col-span-8 space-y-5">
-          
-          {/* Modality Toggle */}
-          <ModalityToggle
-            value={modality}
-            onChange={setModality}
-          />
+        {/* Paso 1: Datos Básicos del Destinatario */}
+        <div className="space-y-3">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+            1. Tus Datos de Entrega
+          </h2>
 
-          {/* Section 1: Client Profile & City */}
-          <ClientProfileForm
-            clientName={clientName}
-            onClientNameChange={setClientName}
-            clientPhone={clientPhone}
-            onClientPhoneChange={setClientPhone}
-            suiteCode={suiteCode}
-            onSuiteCodeChange={setSuiteCode}
-            onOpenSuiteModal={() => setSuiteModalOpen(true)}
-            destinationCity={destinationCity}
-            onDestinationCityChange={setDestinationCity}
-            deliveryMethod={deliveryMethod}
-            onDeliveryMethodChange={setDeliveryMethod}
-            deliveryAddress={deliveryAddress}
-            onDeliveryAddressChange={setDeliveryAddress}
-            errors={errors}
-          />
-
-          {/* Section 2: Items Builder */}
-          <DynamicItemBuilder
-            items={items}
-            modality={modality}
-            onChange={setItems}
-          />
-
-          {/* Section 3: Optional Invoice Proof Dropzone */}
-          <div className="bg-surface rounded-2xl p-5 border border-outline-variant/30 space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-md bg-primary-container text-white text-xs font-bold flex items-center justify-center">
-                3
-              </span>
-              <h3 className="font-display font-bold text-sm text-on-surface">
-                Factura o Comprobante de Compra (Opcional)
-              </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                Nombre Completo *
+              </label>
+              <input
+                type="text"
+                required
+                value={clientName}
+                onChange={(e) => setClientName(e.target.value)}
+                placeholder="Ej. Juan Pérez"
+                className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+              />
             </div>
-            <FileUploadDropzone
-              file={invoiceFile}
-              onFileSelect={setInvoiceFile}
-            />
+
+            <div>
+              <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                WhatsApp Bolivia *
+              </label>
+              <div className="flex rounded-lg overflow-hidden bg-surface-container-low">
+                <span className="px-2.5 flex items-center text-xs font-bold text-on-surface-variant bg-surface-container">
+                  +591
+                </span>
+                <input
+                  type="tel"
+                  required
+                  value={clientPhone}
+                  onChange={(e) => setClientPhone(e.target.value.replace(/\D/g, '').slice(0, 8))}
+                  placeholder="77012345"
+                  className="w-full h-10 px-3 bg-transparent text-on-surface text-xs focus:outline-none"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                Ciudad en Bolivia
+              </label>
+              <select
+                value={destinationCity}
+                onChange={(e) => setDestinationCity(e.target.value)}
+                className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+              >
+                <option value="Santa Cruz de la Sierra">Santa Cruz (Equipetrol)</option>
+                <option value="La Paz">La Paz (Sopocachi / Calacoto)</option>
+                <option value="Cochabamba">Cochabamba (Zona Norte)</option>
+                <option value="Sucre">Sucre</option>
+                <option value="Tarija">Tarija</option>
+                <option value="Oruro">Oruro</option>
+                <option value="Potosí">Potosí</option>
+                <option value="Beni">Beni</option>
+                <option value="Pando">Pando</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                Entrega
+              </label>
+              <div className="grid grid-cols-2 gap-2 h-10">
+                <button
+                  type="button"
+                  onClick={() => setDeliveryMethod('pickup')}
+                  className={`rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all ${
+                    deliveryMethod === 'pickup'
+                      ? 'bg-secondary text-white font-bold'
+                      : 'bg-surface-container-low text-on-surface-variant'
+                  }`}
+                >
+                  <Icon name="store" size={14} />
+                  <span>Sucursal ($0)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDeliveryMethod('delivery')}
+                  className={`rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-all ${
+                    deliveryMethod === 'delivery'
+                      ? 'bg-secondary text-white font-bold'
+                      : 'bg-surface-container-low text-on-surface-variant'
+                  }`}
+                >
+                  <Icon name="local_shipping" size={14} />
+                  <span>Domicilio</span>
+                </button>
+              </div>
+            </div>
           </div>
 
+          {deliveryMethod === 'delivery' && (
+            <div className="pt-1">
+              <input
+                type="text"
+                value={deliveryAddress}
+                onChange={(e) => setDeliveryAddress(e.target.value)}
+                placeholder="Dirección exacta en tu ciudad..."
+                className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+              />
+            </div>
+          )}
         </div>
 
-        {/* Sticky Cost Summary (4 Cols) */}
-        <div className="lg:col-span-4 sticky top-24">
-          <StickySummarySidebar
-            modality={modality}
-            items={items}
-            financials={financials}
-            isSubmitting={isSubmitting}
-            onSubmit={handleSubmit}
-          />
+        {/* Paso 2: Según Modalidad */}
+        <div className="pt-2 border-t border-outline-variant/20 space-y-3">
+          
+          {modality === 'prealert' ? (
+            /* CASO ECOMMERCE: TICKET Y TRACKING */
+            <div className="space-y-3">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-1.5">
+                <Icon name="receipt" size={14} className="text-secondary" />
+                <span>2. Ticket / Comprobante de tu Compra Online</span>
+              </h2>
+
+              <div>
+                <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                  Número de Tracking USA (si ya te lo enviaron)
+                </label>
+                <input
+                  type="text"
+                  value={trackingNumber}
+                  onChange={(e) => setTrackingNumber(e.target.value)}
+                  placeholder="Ej. FedEx, UPS, USPS o Amazon TBA..."
+                  className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                  Adjuntar Ticket, Factura o Captura de Compra (PDF o Imagen)
+                </label>
+                <label className="border border-dashed border-outline-variant rounded-xl p-4 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-surface-container-low transition-colors">
+                  <input
+                    type="file"
+                    accept="image/*,.pdf"
+                    className="hidden"
+                    onChange={(e) => setTicketFile(e.target.files?.[0] || null)}
+                  />
+                  <Icon name="upload_file" size={24} className="text-secondary" />
+                  <span className="text-xs font-semibold text-on-surface">
+                    {ticketFile ? ticketFile.name : 'Haz clic para seleccionar el comprobante o factura'}
+                  </span>
+                  <span className="text-[11px] text-on-surface-variant">
+                    {ticketFile ? 'Archivo seleccionado correctamente' : 'Comprobante emitido por Amazon, Apple, Best Buy, etc.'}
+                  </span>
+                </label>
+              </div>
+            </div>
+          ) : (
+            /* CASO COMPRA ASISTIDA: ITEM PARA VISUALIZAR Y FONDOS REQUERIDOS */
+            <div className="space-y-3">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-1.5">
+                <Icon name="shopping_bag" size={14} className="text-secondary" />
+                <span>2. Item a Comprar y Fondos Requeridos</span>
+              </h2>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                    Descripción del Item a Comprar *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={itemDescription}
+                    onChange={(e) => setItemDescription(e.target.value)}
+                    placeholder="Ej. MacBook Air 13'' M2 16GB RAM o Puffer Jacket Tommy M"
+                    className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                    Tienda en Nueva York
+                  </label>
+                  <input
+                    type="text"
+                    value={itemStore}
+                    onChange={(e) => setItemStore(e.target.value)}
+                    placeholder="Ej. Best Buy, Apple 5th Ave, Nike, Sephora"
+                    className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                    Fondos Estimados / Precio del Producto *
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-2.5 text-xs font-bold text-on-surface-variant">$</span>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      required
+                      value={estimatedBudgetUSD || ''}
+                      onChange={(e) => setEstimatedBudgetUSD(parseFloat(e.target.value) || 0)}
+                      placeholder="Precio en USD"
+                      className="w-full h-10 pl-7 pr-3 rounded-lg bg-surface-container-low text-on-surface text-xs font-bold focus:outline-none focus:ring-1 focus:ring-secondary"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                    Enlace Web / Referencia (Opcional)
+                  </label>
+                  <input
+                    type="url"
+                    value={itemUrl}
+                    onChange={(e) => setItemUrl(e.target.value)}
+                    placeholder="https://www.apple.com/... o https://bestbuy.com/..."
+                    className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-medium text-on-surface-variant mb-1">
+                    Detalles para la compra (Talla, Color, Modelo exacto)
+                  </label>
+                  <input
+                    type="text"
+                    value={itemNotes}
+                    onChange={(e) => setItemNotes(e.target.value)}
+                    placeholder="Ej. Color Midnight, teclado en inglés, talla US 9.5..."
+                    className="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs focus:outline-none focus:ring-1 focus:ring-secondary"
+                  />
+                </div>
+              </div>
+
+              {/* Caja de cálculo de fondos requeridos */}
+              {estimatedBudgetUSD > 0 && (
+                <div className="p-3.5 rounded-xl bg-surface-container-low/80 border border-outline-variant/30 space-y-1.5 text-xs">
+                  <div className="flex justify-between font-medium text-on-surface-variant">
+                    <span>Precio del Producto:</span>
+                    <span>${estimatedBudgetUSD.toFixed(2)} USD</span>
+                  </div>
+                  <div className="flex justify-between font-medium text-on-surface-variant">
+                    <span>Comisión Compra Asistida (8%):</span>
+                    <span>${(estimatedBudgetUSD * 0.08).toFixed(2)} USD</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-on-surface pt-1 border-t border-outline-variant/20 text-sm">
+                    <span>Fondos Requeridos:</span>
+                    <span className="text-secondary font-display">
+                      ${(estimatedBudgetUSD * 1.08).toFixed(2)} USD{' '}
+                      <span className="text-xs text-on-surface-variant font-normal">
+                        (aprox. Bs. {(estimatedBudgetUSD * 1.08 * 6.96).toFixed(0)})
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
         </div>
 
-      </div>
+        {errorMsg && (
+          <p className="text-xs text-error font-medium">{errorMsg}</p>
+        )}
 
-      {/* Modals */}
-      <SuiteCodeModal
-        isOpen={suiteModalOpen}
-        onClose={() => setSuiteModalOpen(false)}
-        currentSuite={suiteCode || 'NY-2026-TEMP'}
-        clientName={clientName}
-      />
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full py-3 px-4 rounded-xl bg-primary-container hover:bg-black text-white text-xs sm:text-sm font-bold shadow-xs transition-all flex items-center justify-center gap-2"
+        >
+          {isSubmitting ? (
+            <span>Procesando...</span>
+          ) : (
+            <>
+              <span>{modality === 'prealert' ? 'Confirmar Registro de Envío' : 'Solicitar Compra Asistida en NY'}</span>
+              <Icon name="arrow_forward" size={15} />
+            </>
+          )}
+        </button>
 
+      </form>
+
+      {/* Modal de éxito minimalista */}
       {createdOrder && (
-        <OrderSuccessModal
-          order={createdOrder}
-          onClose={() => setCreatedOrder(null)}
-        />
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-surface rounded-2xl max-w-md w-full p-6 space-y-4 shadow-xl border border-outline-variant/30">
+            <div className="w-12 h-12 rounded-full bg-secondary/15 text-secondary flex items-center justify-center mx-auto">
+              <Icon name="check_circle" size={28} />
+            </div>
+
+            <div className="text-center space-y-1">
+              <h3 className="text-lg font-bold font-display text-on-surface">
+                ¡Solicitud Registrada Exitosamente!
+              </h3>
+              <p className="text-xs text-on-surface-variant">
+                Número de Orden: <strong className="text-on-surface font-mono">{createdOrder.id}</strong>
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-surface-container-low text-xs space-y-1 text-on-surface-variant">
+              <p><strong>Destinatario:</strong> {clientName}</p>
+              <p><strong>Destino:</strong> {destinationCity}</p>
+              {modality === 'assisted' && (
+                <p><strong>Item:</strong> {itemDescription} (${estimatedBudgetUSD} USD)</p>
+              )}
+            </div>
+
+            <div className="space-y-2 pt-2">
+              <a
+                href={getWhatsAppConfirmLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-xs"
+              >
+                <Icon name="chat" size={16} />
+                <span>Confirmar con Asesor por WhatsApp</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={() => setCreatedOrder(null)}
+                className="w-full py-2.5 text-xs text-on-surface-variant hover:text-on-surface"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
+
     </div>
   );
 }
