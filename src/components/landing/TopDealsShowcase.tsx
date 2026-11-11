@@ -1076,22 +1076,6 @@ export function TopDealsShowcase() {
         {/* ========================================================================= */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="space-y-2 max-w-3xl">
-            <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed/40 text-secondary text-xs font-semibold">
-              <span className="flex items-center gap-1">
-                <span>🇺🇸</span>
-                <span>Marcas Americanas de Culto</span>
-              </span>
-              <span className="text-secondary/30">•</span>
-              <span className="text-emerald-700 font-bold flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>{under50Count} Chollos Menores a $50 USD</span>
-              </span>
-              <span className="text-secondary/30">•</span>
-              <span className="font-mono text-[11px] text-primary-container font-bold">
-                Llega a Bolivia para Navidad
-              </span>
-            </div>
-
             <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-on-surface tracking-tight">
               Ofertas Black Friday USA: Marcas Americanas & Oportunidades Reales
             </h2>
