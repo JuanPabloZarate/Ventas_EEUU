@@ -43,6 +43,14 @@ export function Navbar({
               Ver Ofertas
             </Link>
 
+            <Link
+              href="/admin/tarifas"
+              className="text-xs sm:text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors hidden md:inline-flex items-center gap-1"
+            >
+              <Icon name="tune" size={14} className="text-secondary" />
+              <span>Gestión de Tarifas</span>
+            </Link>
+
             <a
               href={whatsappHref}
               target="_blank"

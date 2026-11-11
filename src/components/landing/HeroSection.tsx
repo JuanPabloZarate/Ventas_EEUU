@@ -56,7 +56,7 @@ export function HeroSection({
         <p className="text-sm sm:text-base text-slate-200 max-w-2xl mx-auto font-sans leading-relaxed drop-shadow-sm">
           Lleva la magia de la 5ta Avenida y Manhattan a tu hogar. Compramos tus regalos en{' '}
           <strong className="text-white font-semibold">Apple, Sephora, Nike, Best Buy y Coach</strong>{' '}
-          con tarifa plana de <strong className="text-amber-300 font-bold">$9.50/Lb</strong> y entregas garantizadas en Bolivia desde el 4 de Diciembre.
+          con gestión directa y entregas garantizadas en Bolivia desde el 4 de Diciembre.
         </p>
 
         {/* Acciones principales */}

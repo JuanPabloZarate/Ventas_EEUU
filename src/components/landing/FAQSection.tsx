@@ -25,7 +25,7 @@ export function FAQSection({
       id: 'pago-bob-qr',
       question: '¿Cómo pago en Bolivia y a qué tipo de cambio?',
       answer:
-        'Puedes cancelar el flete ($9.50/lb) y las compras asistidas en Bolivianos (BOB) mediante QR Simple interbancario o transferencia a nuestras cuentas bancarias locales en Bolivia, al tipo de cambio oficial de 6.96 Bs por USD, sin cargos por tarjeta internacional.',
+        'Puedes cancelar el servicio y las compras asistidas en Bolivianos (BOB) mediante QR Simple interbancario o transferencia a nuestras cuentas locales en Bolivia, al tipo de cambio oficial de 6.96 Bs por USD, sin cargos por tarjeta internacional.',
     },
     {
       id: 'modalidades-diferencia',
@@ -35,9 +35,9 @@ export function FAQSection({
     },
     {
       id: 'calculo-flete-aduana',
-      question: '¿Cuánto cuesta el envío y qué incluye?',
+      question: '¿Cómo se determinan las tarifas y qué incluye?',
       answer:
-        'La tarifa promocional es de $9.50 USD por libra (peso real). Incluye la recepción en Nueva York, vuelo directo a Bolivia y desaduanización simplificada para compras de uso personal. No hay cobros sorpresivos al retirar.',
+        'Cada producto cuenta con una tarifa personalizada y transparente según su categoría (tecnología, ropa, calzado o cosméticos). Incluye la recepción en almacén, vuelo directo y desaduanización simplificada para compras de uso personal. Sin cobros sorpresivos al retirar.',
     },
     {
       id: 'sucursales-entregas',
