@@ -3,34 +3,31 @@ import type { Metadata } from 'next';
 import { AnnouncementBar } from '@/components/layout/AnnouncementBar';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
 import { RegistroFlow } from '@/components/registration/RegistroFlow';
-import { RegistrationPageSkeleton } from '@/components/registration/RegistrationPageSkeleton';
 
 export const metadata: Metadata = {
-  title: 'Registro de Producto & Pre-Alerta | NY2Bolivia',
-  description: 'Pre-alerta de compras en USA y solicitud de Compra Asistida en New York. Casillero postal y flete directo a Bolivia.',
+  title: 'Registro de Compra o Pedido | NY2Bolivia',
+  description: 'Registro de compra online con ticket o solicitud de compra asistida en tienda de Nueva York.',
 };
 
 export default function RegistroPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed antialiased">
-      {/* 1. Urgency Top Bar */}
+    <div className="min-h-screen flex flex-col bg-surface text-on-surface antialiased">
+      {/* 1. Barra superior */}
       <AnnouncementBar deliveryDate="4 de Diciembre" ctaHref="/registro" />
 
-      {/* 2. Responsive Header Navigation */}
+      {/* 2. Header */}
       <Navbar whatsappNumber="59177012345" />
 
-      {/* 3. Main Container wrapped in Suspense for static prerendering */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-28 md:pb-16">
-        <Suspense fallback={<RegistrationPageSkeleton />}>
+      {/* 3. Contenedor del Formulario Simplificado */}
+      <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Suspense fallback={<div className="text-center py-12 text-on-surface-variant text-sm">Cargando formulario...</div>}>
           <RegistroFlow />
         </Suspense>
       </main>
 
-      {/* 4. Footer & Mobile Navigation */}
+      {/* 4. Footer */}
       <Footer />
-      <MobileBottomNav whatsappNumber="59177012345" />
     </div>
   );
 }
